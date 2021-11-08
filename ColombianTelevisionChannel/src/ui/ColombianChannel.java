@@ -48,7 +48,7 @@ public class ColombianChannel {
     */
 	public void systemStartChannel() {
 		System.out.println("Welcome to the management application for the channel");
-		System.out.println("Enter your number bb");
+		System.out.println("Enter the NIT");
 		int nit= sc.nextInt();
 		
 		System.out.println("Enter the address");

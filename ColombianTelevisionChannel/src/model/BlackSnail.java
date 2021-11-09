@@ -1,5 +1,9 @@
 package model;
 
+
+/**
+* It is the main class of the model 
+*/
 public class BlackSnail {
 	
 
@@ -16,7 +20,7 @@ public class BlackSnail {
 
 	
 	/**
-    * This is the constructor method of the Blacksnail class</br>
+    * This is the constructor method of the Blacksnail class
    
     * @param nit int
 	* @param address String
@@ -54,7 +58,7 @@ public class BlackSnail {
 		this.website = website;
 	}
 	/**
-    * This method validates if the ID entered by the user is already registered</br>
+    * This method validates if the ID entered by the user is already registered
    
     * @param id int
     * @return out boolean
@@ -74,7 +78,7 @@ public class BlackSnail {
 		
 	}
 	/**
-    * This method does not belong to exercise, but it works to display all the stored information of the movie type products.</br>
+    * This method does not belong to exercise, but it works to display all the stored information of the movie type products.
     * @return films String, It is a chain of all the information of all the stored movies.
     */
 	public String showMovie(){
@@ -90,7 +94,7 @@ public class BlackSnail {
 		return films;
 	}
 	/**
-    * This method does not belong to exercise, but it works to display all the stored information of the Series type products.</br>
+    * This method does not belong to exercise, but it works to display all the stored information of the Series type products.
     * @return series String, It is a chain of all the information of all the stored series.
     */
 	public String showSeries(){
@@ -106,7 +110,7 @@ public class BlackSnail {
 		return series;
 	}
 	/**
-    *This method is in charge of validating if there is space to register more products </br>
+    *This method is in charge of validating if there is space to register more products 
     * @return thereIsNot boolean,If true it means that there is no space to record more.
     */
 	public boolean SpaceForMoreProducts(){
@@ -133,7 +137,7 @@ public class BlackSnail {
 		
 	}
 	/**
-    * This method is in charge of creating a String chain where it stores the information of all the series with its last season.</br>
+    * This method is in charge of creating a String chain where it stores the information of all the series with its last season.
     * @return listseries String, String string with all the information to print
     */
 	public String listSerie(){
@@ -149,7 +153,7 @@ public class BlackSnail {
 		return listseries;
 	}
 	/**
-    * This method, according to the selected category, creates a chain of Strings where it stores a list of all the movies of that chosen category.</br>
+    * This method, according to the selected category, creates a chain of Strings where it stores a list of all the movies of that chosen category.
     * @param category int
     * @return listMovies String, chain with all the information of the movies of that selected category
     */
@@ -203,7 +207,7 @@ public class BlackSnail {
 		return listMovies;
 	}
 	/**
-    * This method is responsible for creating another season for an already created series, and for this it calls a method of the Series subclass.</br>
+    * This method is responsible for creating another season for an already created series, and for this it calls a method of the Series subclass.
     * @param seriesName String
 	* @param numScheduledEpi int
 	* @param numEpiPub int
@@ -229,7 +233,7 @@ public class BlackSnail {
 		
 	}
 	/**
-    * This method is in charge of checking if the name of the series that the user entered if it is registered</br>
+    * This method is in charge of checking if the name of the series that the user entered if it is registered
     * @param seriesName String
     * @return registered boolean,If it is true it means that if it is registered
     */
@@ -251,7 +255,7 @@ public class BlackSnail {
 		return registered;
 	}
 	/**
-    * This method is in charge of validating if the name to be registered for a product is already registered.</br>
+    * This method is in charge of validating if the name to be registered for a product is already registered.
     * @param productName String
     * @return registered boolean,If it is true it means that if it is registered
     */
@@ -279,7 +283,7 @@ public class BlackSnail {
 		return registered;
 	}
 	/**
-    * This method searches for the product with the name that the user enters</br>
+    * This method searches for the product with the name that the user enters
     * @param productName String
     * @return productInformation String,It depends on whether you find (product information) or not the product (product message not found).
     */
@@ -313,7 +317,7 @@ public class BlackSnail {
 	
 	
 	/**
-    * This method is responsible for creating the objects depending on the type of product that the user chose</br>
+    * This method is responsible for creating the objects depending on the type of product that the user chose
 	* @param productType int
 	* @param nameDirector String
 	* @param synopsis String
@@ -352,7 +356,7 @@ public class BlackSnail {
 		
 	}
 	/**
-    *This method is in charge of validating if there is space to register more subscribers</br>
+    *This method is in charge of validating if there is space to register more subscribers
   
     * @return thereIsNot boolean,If true, it means that there is no space to register more subscribers, that is, the limit has already been reached.
     */
@@ -380,11 +384,8 @@ public class BlackSnail {
 	}
 	
 	/**
-    * Descripción: ¿qué hace mi método? (concisa, un par de líneas)</br>
-    * <b> pre:</b> ¿cuáles son las condiciones sobre las variables globales? --> si hay una condición sobre var glob. </br>
-    * <b> pos:</b> ¿Cuales fueron los cambios sobre las variables globales? --> si ocurrio un cambio cn var glob.
-    * @param <nombre_par> <tipo>, condiciones sobre el parametro --> si tiene
-    * @return <nombre_var> <tipo>, informacion sobre variable de retorno --> retorno
+    * This method shows all the information of all subscribers
+    * @return allSuscriptorRegistered String,chain of all subscribers
     */
 	public String AllSuscriptor(){
 		String allSuscriptorRegistered="";
@@ -402,7 +403,7 @@ public class BlackSnail {
 		return allSuscriptorRegistered;
 	}
 	/**
-    *This method is responsible for saving the information in the subscriber object, it also adds the enumerations</br>
+    *This method is responsible for saving the information in the subscriber object, it also adds the enumerations
    
     * @param id int
 	* @param fullName String
@@ -448,10 +449,10 @@ public class BlackSnail {
 
 	}
 	/**
-    * This method is in charge of validating if the subscriber to be deactivated already exists</br>
+    * This method is in charge of validating if the subscriber to be deactivated already exists
 
     * @param numberDisable int
-    * @returnyesExists boolean, if true it means that this subscriber is registered
+    * @return yesExists boolean, if true it means that this subscriber is registered
     */
 	public boolean numDeactivateExists(int numberDisable){
 		boolean yesExists=false;
@@ -462,7 +463,7 @@ public class BlackSnail {
 		return yesExists;
 	}
 	/**
-    * This method is responsible for deactivating the selected subscriber</br>
+    * This method is responsible for deactivating the selected subscriber
   
     * @param numberDisable int
    
@@ -472,7 +473,7 @@ public class BlackSnail {
 		subscribers[numberDisable-1].setType(CustomerType.NORMAL);
 	}
 	/**
-    * This method is responsible for validating that the id entered to disable a subscriber, is already registered</br>
+    * This method is responsible for validating that the id entered to disable a subscriber, is already registered
    
     * @param idForDisable int
     * @return yesExistsboolean, If true, it means that the id is registered and can be disabled
@@ -494,7 +495,7 @@ public class BlackSnail {
 		return yesExists;
 	}
 	/**
-    * This method is responsible for deactivating the subscriber, and modifying their information</br>
+    * This method is responsible for deactivating the subscriber, and modifying their information
    
     * @param idForDisable int
    
@@ -517,7 +518,7 @@ public class BlackSnail {
 		}
 	}
 	/**
-    * this method adds each registered subscriber of type ACTIVE to have a total</br>
+    * this method adds each registered subscriber of type ACTIVE to have a total
    
     * @return infoTOTALAct String,Chain with the total sum of ACTIVE subscribers
     */
@@ -535,7 +536,7 @@ public class BlackSnail {
 		return "-The total number of active subscribers is:  "+numActiveSubscribers+"\n";
 	}
 	/**
-    * this method takes the sum of all registered subscribers who have a NORMAL account type</br>
+    * this method takes the sum of all registered subscribers who have a NORMAL account type
    
     * @return infoNORMAL String,string of total sum of subscribers of type NORMAL
     */
@@ -555,7 +556,7 @@ public class BlackSnail {
 		return "-The number of active and NORMAL subscribers: "+ActiveNORMAL+"\n";
 	}
 	/**
-    * this method takes the sum of all registered subscribers who have a PLATINUM account type</br>
+    * this method takes the sum of all registered subscribers who have a PLATINUM account type
    
     * @return infoPLATINUM String,string of total sum of subscribers of type PLATINUM
     */
@@ -575,7 +576,7 @@ public class BlackSnail {
 		return "-The number of active and PLATINUM subscribers:"+ActivePLATINUM+"\n";
 	}
 	/**
-    * this method takes the sum of all registered subscribers who have a GOLD account type</br>
+    * this method takes the sum of all registered subscribers who have a GOLD account type
    
     * @return infoGOLD String,string of total sum of subscribers of type GOLD
     */
@@ -595,10 +596,9 @@ public class BlackSnail {
 		return "-The number of active and GOLD subscribers:"+ActiveGOLD+"\n";
 	}
 	/**
-    * this method takes the sum of all registered subscribers who have a DIAMOND account type</br>
+    * this method takes the sum of all registered subscribers who have a DIAMOND account type
    
-    * @return 
-		int ActiveDIAMOND String,string of total sum of subscribers of type DIAMOND
+    * @return ActiveDIAMOND String,string of total sum of subscribers of type DIAMOND
     */
 	public String infoDIAMOND(){
 		
@@ -616,7 +616,7 @@ public class BlackSnail {
 		return "-The number of active and DIAMOND subscribers:"+ActiveDIAMOND+"\n";
 	}
 	/**
-    * This method is responsible for finding and returning in a chain to the underage subscriber with the longest hours willing to consume</br>
+    * This method is responsible for finding and returning in a chain to the underage subscriber with the longest hours willing to consume
 
     * @return subscriberMayorWillConsume String
     */

@@ -1,6 +1,10 @@
 package model;
 
 
+
+/**
+* It is the class that has the subscriber object 
+*/
 public class Subscriber {
 	
 
@@ -13,7 +17,7 @@ public class Subscriber {
 	private CustomerType type;
 	private Status states;
 	/**
-    * This is the constructor method of the Subscriber class</br>
+    * This is the constructor method of the Subscriber class
    
     * @param id int
 	* @param fullName String
@@ -81,7 +85,7 @@ public class Subscriber {
 		
 	}
 	/**
-    * This method is the toString method of the class and stores the information of each subscriber object individually.</br>
+    * This method is the toString method of the class and stores the information of each subscriber object individually.
 
     * @return toString String, this return is a string with the subscriber's information
     */

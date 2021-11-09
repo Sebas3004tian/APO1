@@ -1,6 +1,10 @@
 package model;
 
 
+
+/**
+* It is the subclass that has the movie object 
+*/
 public class Movie extends Product {
 	
 

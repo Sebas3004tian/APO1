@@ -1,6 +1,10 @@
 package model;
 
 
+
+/**
+* It is the abstract class of the product object 
+*/
 public abstract class Product {
 
 	private String nameDirector;

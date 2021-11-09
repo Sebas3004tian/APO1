@@ -1,6 +1,10 @@
 package model;
 
 
+
+/**
+* It is the class of the season object 
+*/
 public class Season{
 	
 

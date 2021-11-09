@@ -2,21 +2,23 @@ package ui;
 import java.util.Scanner;
 import model.BlackSnail;
 
-
+/**
+* It is the main class of the application 
+*/
 public class ColombianChannel {
 	private BlackSnail channels;
 	private Scanner sc;
 
 	/**
-    * The method is used to define the scanner</br>
+    * The method is used to define the scanner 
 
     */
 	public ColombianChannel() {
 		sc= new Scanner(System.in);
 	}
 	/**
-    *In this method a menu object is created and the initial menu method is called</br>
-
+    *In this method a menu object is created and the initial menu method is called 
+	* @param args String
     */
 	public static void main(String[] args) {
 		ColombianChannel menu = new ColombianChannel();
@@ -34,7 +36,7 @@ public class ColombianChannel {
 		
 	}
 	/**
-    *This method is the one that asks for the main entries before starting to go to the main menu</br>
+    *This method is the one that asks for the main entries before starting to go to the main menu 
 
     */
 	public void systemStartChannel() {
@@ -52,8 +54,8 @@ public class ColombianChannel {
 		channels = new BlackSnail(nit,address,website);
 	}
 	/**
-    *In this method you can choose 3 options, (currently only option 1 works)</br>
-
+    *In this method you can choose 3 options, (currently only option 1 works)
+	* @return answer int,its the answer to select a option
     */
 	public int initialMenu(){
 		
@@ -69,7 +71,8 @@ public class ColombianChannel {
 		return answer;
 	}
 	/**
-    *In this method you can choose 3 options, (currently only option 1 works)</br>
+    *In this method you can choose 3 options, (currently only option 1 works)
+	* @param answerInitialMenu int
 
     */
 	public void initialMenuOption(int answerInitialMenu) {
@@ -104,7 +107,8 @@ public class ColombianChannel {
 		
 	}
 	/**
-    * This method shows the 5 options that can be made in the product management section, it also receives the response input.</br>
+    * This method shows the 5 options that can be made in the product management section, it also receives the response input.
+	* @return answer int,its the answer to select a option
 	*/
 	public int createProductMenu(){
 		System.out.println("");
@@ -128,7 +132,7 @@ public class ColombianChannel {
 		return answer;
 	}
 	/**
-    * In this method you choose what you want to do (5 options) in the product management section.</br>
+    * In this method you choose what you want to do (5 options) in the product management section. 
     * @param answerMenuProducts int, number from (0 to 5).
     */
 	public void optionMenuProduct(int answerMenuProducts) {
@@ -167,13 +171,13 @@ public class ColombianChannel {
 		
 	}
 	/**
-    * This method prints a method located in the BlackSanail class that is in charge of listing all the series registered with their last season</br>
+    * This method prints a method located in the BlackSanail class that is in charge of listing all the series registered with their last season
 	*/
 	public void listSeries(){
 		System.out.println(channels.listSerie());
 	}
 	/**
-    * This method prints a method that stores information about the movies depending on their category, the calling method is in the BlackSnail class</br>
+    * This method prints a method that stores information about the movies depending on their category, the calling method is in the BlackSnail class 
     */
 	public void listMovies(){
 		boolean out = false;
@@ -197,7 +201,7 @@ public class ColombianChannel {
 		}while(!out);
 	}
 	/**
-    * This method is in charge of calling the methods that create a next season of a series that is in the BlackSnail class</br>
+    * This method is in charge of calling the methods that create a next season of a series that is in the BlackSnail class 
     */
 	public void createSeason(){
 		boolean out = false;
@@ -311,7 +315,7 @@ public class ColombianChannel {
 		
 	}
 	/**
-    * This method is in charge of asking for the name of the product, calling the method that validates the name and then printing the method that stores the product information.</br>
+    * This method is in charge of asking for the name of the product, calling the method that validates the name and then printing the method that stores the product information.
     */
 	public void inforProduct(){
 		System.out.println("Enter the name of the product you want to search for:");
@@ -321,7 +325,7 @@ public class ColombianChannel {
 		
 	}
 	/**
-    *This method is in charge of creating a new product (movie or series), it also calls the validation methods that store the data in the BlackSnail class.</br>
+    *This method is in charge of creating a new product (movie or series), it also calls the validation methods that store the data in the BlackSnail class. 
     */
 	public void crearNuevoProducto(){
 		
@@ -671,8 +675,8 @@ public class ColombianChannel {
 		
 	}
 	/**
-    *This method is the method that the menu contains when the subscriber management option is selected.</br>
-   
+    *This method is the method that the menu contains when the subscriber management option is selected. 
+	* @return answer int,its the answer to select a option
     */
 	public int MenuSubscribers(){
 		System.out.println("");
@@ -695,7 +699,7 @@ public class ColombianChannel {
 		return answer;
 	}
 	/**
-    *This method is in charge of calling the methods that meet each requirement and that perform the function shown in the subscribers menu method.</br>
+    *This method is in charge of calling the methods that meet each requirement and that perform the function shown in the subscribers menu method. 
     
     * @param answerMenuSubscribers int,This number is from 0 to 4
     
@@ -734,7 +738,7 @@ public class ColombianChannel {
 		
 	}
 	/**
-    * This is responsible for calling another method hosted in the BlackSnail class</br>
+    * This is responsible for calling another method hosted in the BlackSnail class 
     
     */
 	public void showHigherSubscriberWillConsume(){
@@ -742,7 +746,7 @@ public class ColombianChannel {
 		System.out.println(channels.subscriberMayorWillConsume());
 	}
 	/**
-    * This method is in charge of calling another method hosted in the BlackSnail class, it does not ask for inputs</br>
+    * This method is in charge of calling another method hosted in the BlackSnail class, it does not ask for inputs 
     
     */
 	public void showInfoSubscribersActive(){
@@ -762,7 +766,7 @@ public class ColombianChannel {
 		System.out.println("--------------------------------------------------------------------------------");
 	}
 	/**
-    * This method is responsible for calling another method hosted in the BlackSnail class, before that it asks for the necessary inputs, verifies some, and calls 2 validation methods</br>
+    * This method is responsible for calling another method hosted in the BlackSnail class, before that it asks for the necessary inputs, verifies some, and calls 2 validation methods 
    
     */
 	public void deactivateSubscriber(){
@@ -829,7 +833,7 @@ public class ColombianChannel {
 		
 	}
 	/**
-    * This method is in charge of calling another method hosted in the BlackSnail class, but first it asks for the necessary inputs to create a subscriber</br>
+    * This method is in charge of calling another method hosted in the BlackSnail class, but first it asks for the necessary inputs to create a subscriber 
 
     */
 	public void createNewSubscriber(){

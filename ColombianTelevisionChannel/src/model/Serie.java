@@ -1,6 +1,10 @@
 package model;
 
 
+
+/**
+* It is the subclass of the Series object 
+*/
 public class Serie extends Product {
 	
 
@@ -31,7 +35,7 @@ public class Serie extends Product {
 		
 	}
 	/**
-    * This method adds a season to an already created serial object.</br>
+    * This method adds a season to an already created serial object.
     * @param numScheduledEpi int
 	* @param numEpiPub int
 	* @param day int

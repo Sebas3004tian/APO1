@@ -1,5 +1,10 @@
 package model;
 
+
+
+/**
+* It is the class that has the date object 
+*/
 public class Date {
 	private int day;
 	private int month;

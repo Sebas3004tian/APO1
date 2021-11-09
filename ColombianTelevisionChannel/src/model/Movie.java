@@ -5,11 +5,9 @@ public class Movie extends Product {
 	
 
 	
-	//private String tituloOriginal;
 	private String producer;
 	private int minimumAge;
 	private String trailer;
-	//private int category;
 
 
 	private Category genero;
@@ -19,11 +17,9 @@ public class Movie extends Product {
 
 	public Movie(String nameDirector,String producer,String synopsis,int day,int month,int year,String productName,int minimumAge,String trailer,int category){
 		super(productName,nameDirector,synopsis);
-		//this.tituloOriginal = tituloOriginal;
 		this.producer = producer;
 		this.minimumAge = minimumAge;
 		this.trailer = trailer;
-		//this.category=category;
 		fechaEstreno = new Date(day, month, year);
 		if(category==1){
 			setGenero(Category.ROMANTIC);
@@ -43,20 +39,6 @@ public class Movie extends Product {
 		
 		
 	}
-	/*@Override
-	public String exampleClase(int par){
-		String mensaje="esta es una pelicula"+par;
-		return mensaje;
-	}*/
-	
-	/*public String getTituloOriginal() {
-		return tituloOriginal;
-	}
-
-	public void setTituloOriginal(String tituloOriginal) {
-		this.tituloOriginal = tituloOriginal;
-	}*/
-
 	public String getProductora() {
 		return producer;
 	}
@@ -88,15 +70,6 @@ public class Movie extends Product {
 		this.genero=genero;
 		
 	}
-	/*public int getCategoria(){
-		return category;
-		
-	}
-	public void setCategoria(int category){
-		this.category=category;
-		
-	}*/
-	
 	public String toString(){
 	
 		

@@ -14,7 +14,6 @@ public class Season{
 	private Date fechaEstrenoTemporada;
 
 	public Season(int x,int numScheduledEpi,int numEpiPub,int day,int month,int year,String trailer) {
-	//public Season(int x,int [] cantEpiProgramados,int [] cantEpiPublicados,int [] diaArray,int [] mesArray,int [] anoArray,String [] trailerArray){
 		
 		this.numeroIdentificacion = x;
 		this.cantEpiProgramados = numScheduledEpi;
@@ -24,16 +23,6 @@ public class Season{
 		
 		
 	}
-	/*public Season(int x,int numScheduledEpi,int numEpiPub,int day,int month,int year,String trailer){
-		
-		this.numeroIdentificacion = x;
-		this.cantEpiProgramados = numScheduledEpi;
-		this.cantEpiPublicados = numEpiPub;
-		fechaEstrenoTemporada = new Date(day,month,year);
-		this.trailer = trailer;
-		
-		
-	}*/
 
 	public int getNumeroIdentificacion() {
 		return numeroIdentificacion;

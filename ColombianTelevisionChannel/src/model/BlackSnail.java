@@ -9,12 +9,7 @@ public class BlackSnail {
 	
 	private Subscriber [] subscribers;
 	private int Subscriber []=new int [50];
-	
-	/*private Product product1;
-	private Product product2;
-	private Product product3;
-	private Product product4;
-	private Product product5;*/
+
 	
 	private Product [] products;
 	private int Product []=new int [85];
@@ -37,48 +32,6 @@ public class BlackSnail {
 		
 		
 	}
-	/*public Product getProduct1() {
-		return product1;
-	}
-
-	public void setProduct1(Product product1) {
-		this.product1 = product1;
-	}
-
-	public Product getProduct2() {
-		return product2;
-	}
-
-	public void setProduct2(Product product2) {
-		this.product2 = product2;
-	}
-
-	public Product getProduct3() {
-		return product3;
-	}
-
-	public void setProduct3(Product product3) {
-		this.product3 = product3;
-	}
-	public Product getProduct4() {
-		return product4;
-	}
-
-	public void setProduct4(Product product4) {
-		this.product4 = product4;
-	}
-
-	public Product getProduct5() {
-		return product5;
-	}
-
-	public void setProduct5(Product product5) {
-		this.product5 = product5;
-	}*/
-	
-	
-	
-	
 	public int getNit() {
 		return nit;
 	}
@@ -120,8 +73,6 @@ public class BlackSnail {
 		
 		
 	}
-	//------------------------------------------------------------------------------------------------SEGUIMIENTO12---------------------------------------
-	//----------------------------------------------------SON METODOS DE PRUEBA
 	/**
     * This method does not belong to exercise, but it works to display all the stored information of the movie type products.</br>
     * @return films String, It is a chain of all the information of all the stored movies.
@@ -148,27 +99,17 @@ public class BlackSnail {
 			if(products[x]!=null){
 				if(products[x] instanceof Serie){
 					series="\n"+products[x].toString()+"\n";
-					//series="\n"+products[x].todasTemporadas()+"\n";
 				}
 			}
 			
 		}
 		return series;
 	}
-	//------------------------------------------------
 	/**
     *This method is in charge of validating if there is space to register more products </br>
     * @return thereIsNot boolean,If true it means that there is no space to record more.
     */
 	public boolean SpaceForMoreProducts(){
-		/*boolean thereIsNot=false;
-		for(int x=0;x<85;x++){
-			if(products[x]!=null){
-				thereIsNot=true;
-			}
-		}
-		return thereIsNot;*/
-		
 		boolean thereIsNot=false;
 		int position=-1;
 		for(int x=0;x<85;x++){
@@ -279,10 +220,7 @@ public class BlackSnail {
 				if(products[x] instanceof Serie){
 					
 					if(products[x].getProductName().equals(seriesName)){
-						/*nameDirector=products[x].getNameDirector();
-						synopsis=products[x].getSinopsis();*/
 						((Serie)products[x]).addSeason(numScheduledEpi,numEpiPub,day,month,year,trailer);
-						//products[x]= new Serie(seriesName,nameDirector,synopsis,numScheduledEpi,numEpiPub,day,month,year,trailer);
 					}
 				}
 			}
@@ -374,8 +312,6 @@ public class BlackSnail {
 	
 	
 	
-	//public void addProduct(int productType,String nameDirector,String synopsis,int day,int month,int year,String tituloOriginal,String producer,int minimumAge,int category,String trailer,String allProtagonists,int censored,String reason,int numSeasonsSeries,int seasonNumber,int numScheduledEpi,int numEpiPub,int [] cantEpiProgramados){
-	//public void addProduct(int productType,String nameDirector,String synopsis,int day,int month,int year,String productName,String producer,int minimumAge,int category,String trailer,String allProtagonists,int censored,String reason,int numSeasonsSeries,int seasonNumber,int numScheduledEpi,int numEpiPub,int [] cantEpiProgramados,int [] cantEpiPublicados,int [] diaArray,int [] mesArray,int [] anoArray,String [] trailerArray){
 	/**
     * This method is responsible for creating the objects depending on the type of product that the user chose</br>
 	* @param productType int
@@ -400,23 +336,6 @@ public class BlackSnail {
 			for(int x=0;x<85;x++){
 				if(products[x]==null){
 					products[x] = new Movie(nameDirector,producer,synopsis,day, month, year,productName,minimumAge,trailer,category);
-					/*if(products[x] instanceof Movie){
-						if(category==1){
-							products[x].setGenero(Category.ROMANTIC);
-						}
-						if(category==2){
-							products[x].setGenero(Category.ACTION);
-						}
-						if(category==3){
-							products[x].setGenero(Category.SUSPENSE);
-						}
-						if(category==4){
-							products[x].setGenero(Category.TERROR);
-						}
-						if(category==5){
-							products[x].setGenero(Category.COMEDY);
-						}
-					}*/
 					x=85;
 				}
 			}
@@ -432,87 +351,6 @@ public class BlackSnail {
 		
 		
 	}
-	public void addSeason(int seasonNumber,int numScheduledEpi,int numEpiPub,int day,int month,int year,String trailer){
-		
-	}
-	
-	/*public void addProduct(int productType,String nameDirector, String producer, String synopsis,int day,int month,int year,String tituloOriginal,int minimumAge,int category,String trailer,String synopsis,String reason){
-		boolean saved=false;
-		int savedPosition=-1;
-		if(productType=2){
-			if(product1==null){
-				Product product1 = new Movie(nameDirector,producer,synopsis,day, month, year,tituloOriginal,minimumAge,category,trailer);
-				if(category==1){
-					product1.setGenero(Category.ROMANTIC);
-				}
-				
-			}else if(product2==null){
-				Product product2 = new Movie(nameDirector,producer,synopsis,day, month, year,tituloOriginal,minimumAge,category,trailer);
-				
-			}else if(product3==null){
-				Product product3 = new Movie(nameDirector,producer,synopsis,day, month, year,tituloOriginal,minimumAge,category,trailer);
-				
-			}else if(product4==null){
-				Product product4 = new Movie(nameDirector,producer,synopsis,day, month, year,tituloOriginal,minimumAge,category,trailer);
-				
-			}else if(product5==null){
-				Product product5 = new Movie(nameDirector,producer,synopsis,day, month, year,tituloOriginal,minimumAge,category,trailer);
-				
-			}
-		}
-		if(productType=1){
-			if(product1==null){
-				Product product1 = new Serie(nameDirector, synopsis,nombresProtagonistas, censored, day, month, year);
-				if(category==1){
-					product1.setGenero(Category.ROMANTIC);
-				}
-				
-			}else if(product2==null){
-				Product product2 = new Serie(nameDirector, synopsis,nombresProtagonistas, censored, day, month, year);
-				
-			}else if(product3==null){
-				Product product3 = new Serie(nameDirector, synopsis,nombresProtagonistas, censored, day, month, year);
-				
-			}else if(product4==null){
-				Product product4 = new Serie(nameDirector, synopsis,nombresProtagonistas, censored, day, month, year);
-				
-			}else if(product5==null){
-				Product product5 = new Serie(nameDirector, synopsis,nombresProtagonistas, censored, day, month, year);
-				
-			}
-		}*/
-		/*for(int x=0;x<5;x++){
-			if(movie[x]==null){
-				
-				movie[x] = new Movie(nameDirector,producer,synopsis,day, month, year,tituloOriginal,minimumAge,category,trailer);
-				if(category==1){
-					movie[x].setGenero(Category.ROMANTIC);
-				}
-				if(category==2){
-					movie[x].setGenero(Category.ACTION);
-				}
-				if(category==3){
-					movie[x].setGenero(Category.SUSPENSE);
-				}
-				if(category==4){
-					movie[x].setGenero(Category.TERROR);
-				}
-				if(category==4){
-					movie[x].setGenero(Category.COMEDY);
-				}
-				
-				saved=true;
-			}
-			if(saved){
-				
-				savedPosition=x;
-				x=5;
-			}
-			
-			
-		}
-	}*/
-	//---------------------------------------------------------------------------------------------------------------------------------------
 	/**
     *This method is in charge of validating if there is space to register more subscribers</br>
   
@@ -541,7 +379,6 @@ public class BlackSnail {
 		
 	}
 	
-	//Metodo para ver informacion---------------------------------------------------------------------------------------------------------------------
 	/**
     * Descripción: ¿qué hace mi método? (concisa, un par de líneas)</br>
     * <b> pre:</b> ¿cuáles son las condiciones sobre las variables globales? --> si hay una condición sobre var glob. </br>
@@ -564,7 +401,6 @@ public class BlackSnail {
 		
 		return allSuscriptorRegistered;
 	}
-	//----------------------------------------------------------------------------------------------------------------------------------------------
 	/**
     *This method is responsible for saving the information in the subscriber object, it also adds the enumerations</br>
    

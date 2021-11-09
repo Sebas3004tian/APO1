@@ -2,10 +2,7 @@ package model;
 
 
 public abstract class Product {
-	/*Trabajar en el metodo añadir produccto ,que se necesita?*/
 
-	
-	//private String nameElemento;
 	private String nameDirector;
 	private String synopsis;
 	
@@ -15,14 +12,12 @@ public abstract class Product {
 
 	
 	public Product(String productName,String nameDirector, String synopsis) {
-		//this.nameElemento = nameElemento;
 		this.productName = productName;
 		this.nameDirector = nameDirector;
 		this.synopsis = synopsis;
 		
 	}
 	
-	//public abstract String exampleClase(int par);
 
 	public String getProductName() {
 		return productName;

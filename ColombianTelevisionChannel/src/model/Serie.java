@@ -4,11 +4,9 @@ package model;
 public class Serie extends Product {
 	
 
-	//private String seriesName;
 	private String allProtagonists;
 	private int censored;
 	private String reason;
-	//private int numSeasonsSeries;
 
 
 	private Season [] seasons;
@@ -18,14 +16,11 @@ public class Serie extends Product {
 
 	public Serie(String productName,String nameDirector,String synopsis,String allProtagonists,int censored,String reason,int day,int month,int year,int numScheduledEpi,int numEpiPub,String trailer){
 		super(productName,nameDirector,synopsis);
-		//this.seriesName=seriesName;
 		this.allProtagonists = allProtagonists;
 		this.censored = censored;
 		this.reason = reason;
 		primeraEmision = new Date(day, month, year);
-		//this.numSeasonsSeries=numSeasonsSeries;
 		seasons = new Season [200];
-		//int accountant=0;
 		for(int x=0;x<200;x++){
 			if(seasons[x]==null){
 				seasons[x] = new Season(x,numScheduledEpi,numEpiPub,day,month,year,trailer);
@@ -54,32 +49,6 @@ public class Serie extends Product {
 		}
 		
 	}
-	/*
-	public Serie(String productName,String nameDirector,String synopsis,int numScheduledEpi,int numEpiPub,int day,int month,int year,String trailer){
-		super(productName,nameDirector,synopsis);
-		primeraEmision = new Date(day, month, year);
-		this.numSeasonsSeries=numSeasonsSeries;
-		seasons = new Season [200];
-		int accountant=0;
-		for(int x=0;x<200;x++){
-			if(seasons[x]==null){
-				seasons[x] = new Season(x,numScheduledEpi,numEpiPub,day,month,year,trailer);
-				accountant++;
-			}
-			if(accountant==1){
-				x=200;		
-			}
-		}
-		
-		
-	}*/
-	/*public String getNombreSerie() {
-		return seriesName;
-	}
-
-	public void setNombreSerie(String seriesName) {
-		this.seriesName = seriesName;
-	}*/
 
 	public String getTodosProtagonistas() {
 		return allProtagonists;
@@ -102,12 +71,6 @@ public class Serie extends Product {
 	public void setMotivo(String reason) {
 		this.reason = reason;
 	}
-	/*public int getNumTemporadasSerie() {
-		return numSeasonsSeries;
-	}
-	public void setNumTemporadasSerie(int numSeasonsSeries) {
-		this.numSeasonsSeries = numSeasonsSeries;
-	}*/
 	public String todasTemporadas(){
 		String allSeasons="";
 		for(int x=0;x<200;x++){

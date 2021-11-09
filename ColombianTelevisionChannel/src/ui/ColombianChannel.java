@@ -6,16 +6,7 @@ import model.BlackSnail;
 public class ColombianChannel {
 	private BlackSnail channels;
 	private Scanner sc;
-	
-	
-	/*private int [] cantEpiProgramados;
-	private int [] cantEpiPublicados;
-	private int [] diaArray;
-	private int [] mesArray;
-	private int [] anoArray;
-	private String [] trailerArray;*/
-	
-	
+
 	/**
     * The method is used to define the scanner</br>
 
@@ -85,7 +76,7 @@ public class ColombianChannel {
 		if(answerInitialMenu!=0&&answerInitialMenu!=1&&answerInitialMenu!=2&answerInitialMenu!=3){
 			System.out.println("///////REMEMBER TO SELECT a number from the menu/////////");
 		}
-		//int answerMenuSubscribers=0;
+		
 		switch(answerInitialMenu) {
 		case 0: 
 			System.out.println("The application is closed, thanks ...");
@@ -106,13 +97,12 @@ public class ColombianChannel {
 			
 			break;
 		case 3: 
-			System.out.println(channels.showMovie());
-			System.out.println(channels.showSeries());
+			//System.out.println(channels.showMovie());     These 2 calls are in case you want to enable a function to see all the registered information of Series and Movies
+			//System.out.println(channels.showSeries());
 			break;
 		}
 		
 	}
-	//--------------------------------------------------------------------------------------------------------------------------------------------------SEGUIMIENTO12
 	/**
     * This method shows the 5 options that can be made in the product management section, it also receives the response input.</br>
 	*/
@@ -336,10 +326,8 @@ public class ColombianChannel {
 	public void crearNuevoProducto(){
 		
 		int productType=0;
-		//Declarando variables 
 		String nameDirector="";
 		String synopsis="";
-		//Movie
 		int day=0;
 		int month=0;
 		int year=0;
@@ -349,24 +337,15 @@ public class ColombianChannel {
 		int minimumAge=0;
 		int category=0;
 		String trailer="";
-		
-		//Serie
-		//String seriesName="";
 		int numOfProtagonists=1;
 		String protagonistName="";
 		String allProtagonists="";
 		int censored=0;
 		String reason="";
 		int numSeasonsSeries=1;
-		//temporadas
 		int seasonNumber=0;
 		int numScheduledEpi=0;
 		int numEpiPub=0;
-		
-		
-		
-		//--------------------
-		
 		
 		
 		System.out.println("What type of product do you want to add?");
@@ -468,7 +447,6 @@ public class ColombianChannel {
 											sc.nextLine();
 											trailer=sc.nextLine();
 											channels.addProduct(productType,nameDirector,synopsis,day,month,year,productName,producer,minimumAge,category,trailer,allProtagonists,censored,reason,numScheduledEpi,numEpiPub);
-											//channels.addProduct(productType,nameDirector,synopsis,day,month,year,tituloOriginal,producer,minimumAge,category,trailer,allProtagonists,censored,reason,numSeasonsSeries,seasonNumber,numScheduledEpi,numEpiPub, cantEpiProgramados);
 										}
 									}
 								}
@@ -581,121 +559,7 @@ public class ColombianChannel {
 											
 										}
 										if(!out){
-											/*System.out.println("Ingresa el numero de temporadas que tiene la serie: ");
-											numSeasonsSeries=sc.nextInt();
-											if(numSeasonsSeries<1){
-												System.out.println("La serie tiene que tener por lo menos 1 temporada");
-												out=true;
-												
-											}*/
 											if(!out){
-												
-												/*cantEpiProgramados = new int [numSeasonsSeries];
-												cantEpiPublicados = new int [numSeasonsSeries];
-												diaArray = new int [numSeasonsSeries];
-												mesArray = new int [numSeasonsSeries];
-												anoArray = new int [numSeasonsSeries];
-												trailerArray = new String [numSeasonsSeries];*/
-												
-												//channels.addProduct(productType,nameDirector,synopsis,day,month,year,tituloOriginal,producer,minimumAge,category,trailer,allProtagonists,censored,reason,numSeasonsSeries,seasonNumber,numScheduledEpi,numEpiPub, cantEpiProgramados);//, cantEpiProgramados eso es un arreglo quitalo si no lo queres
-												/*for(int i=0;i<numSeasonsSeries;i++){
-													seasonNumber=i+1;
-													System.out.println("Ingresa el numero de episodios programados para la temporada "+seasonNumber+" : ");
-													numScheduledEpi=sc.nextInt();
-													cantEpiProgramados[i] = numScheduledEpi;
-													
-													if(numScheduledEpi<0){
-														System.out.println("ERROR the number of programmed episodes must be greater than or 0");
-														out=true;
-														i=numSeasonsSeries;
-													}
-													if(!out){
-														
-														System.out.println("Ingresa el numero de episodios publicados para la temporada "+seasonNumber+" : ");
-														numEpiPub=sc.nextInt();
-														if(numEpiPub<0){
-															System.out.println("ERROR el numero de episodios publicados debe ser mayor o 0");
-															out=true;
-															i=numSeasonsSeries;
-														}
-														if(!out){
-															cantEpiPublicados[i] = numEpiPub;
-															
-														
-															System.out.println("Ingresa la fecha de estreno de la temporada:");
-															System.out.println("Dia :");
-															day=sc.nextInt();
-															
-															
-															if(day>31 || day<0){
-																
-																System.out.println("ERROR Ningun month tiene mas de 31 dias.");
-																out=true;
-																i=numSeasonsSeries;
-															}
-															if(!out){
-																diaArray[i] = day;
-																System.out.println("Mes :");
-																month=sc.nextInt();
-																if(month>12 || month<0){
-																	System.out.println("ERROR Ningun año tiene mas de 12 meses.");
-																	out=true;
-																	i=numSeasonsSeries;
-																}
-																if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12 ){
-																	
-																}
-																if(month==4 || month==6 || month==9 || month==11){
-																	if(day>30){
-																		System.out.println("ERROR Este month tiene 30 dias.");
-																		out=true;
-																		i=numSeasonsSeries;
-																	}
-																}
-																if(month==2){
-																	if(month%4==0){
-																		if(day>29){
-																			System.out.println("ERROR Este month tiene 29 dias.");
-																			out=true;
-																			i=numSeasonsSeries;
-																		}
-																	}
-																	if(month%4!=0){
-																		if(day>28){
-																			System.out.println("ERROR Este month tiene 29 dias.");
-																			out=true;
-																			i=numSeasonsSeries;
-																		}
-																	}					
-																}
-																if(!out){
-																	mesArray[i] = month;
-																	System.out.println("Año :");
-																	year=sc.nextInt();
-																	if(year<0){
-																		System.out.println(" ERROR no hay años negativos");
-																		out=true;
-																		i=numSeasonsSeries;
-																	}
-																	if(!out){
-																		anoArray[i] = year;
-																		System.out.println("Ingresa el link del trailer de la temporada: ");
-																		sc.nextLine();
-																		trailer=sc.nextLine();
-																		trailerArray[i] = trailer;
-																		channels.addProduct(productType,nameDirector,synopsis,day,month,year,productName,producer,minimumAge,category,trailer,allProtagonists,censored,reason,numSeasonsSeries,seasonNumber,numScheduledEpi,numEpiPub);
-																		//channels.addSeason(seasonNumber,numScheduledEpi,numEpiPub,day,month,year,trailer);
-																		
-																	}
-																}
-															}
-														}
-													}
-												
-													
-												}*/
-												
-												
 												System.out.println("Enter the number of episodes scheduled for the season: ");
 												numScheduledEpi=sc.nextInt();
 												
@@ -780,7 +644,6 @@ public class ColombianChannel {
 																	trailer=sc.nextLine();
 																	
 																	channels.addProduct(productType,nameDirector,synopsis,day,month,year,productName,producer,minimumAge,category,trailer,allProtagonists,censored,reason,numScheduledEpi,numEpiPub);
-																	//channels.addSeason(seasonNumber,numScheduledEpi,numEpiPub,day,month,year,trailer);
 																	
 																}
 															}
@@ -807,216 +670,6 @@ public class ColombianChannel {
 		}
 		
 	}
-	/*
-	private int [] cantEpiProgramados;
-	private int [] cantEpiPublicados;
-	private int [] diaArray;
-	private int [] mesArray;
-	private int [] añoArray;
-	private String [] trailer;
-	*/
-	/*
-	public void optionMenuProduct(int answerMenuProducts) {
-		if(answerMenuProducts!=0&&answerMenuProducts!=1&&answerMenuProducts!=2){
-			System.out.println("///////REMEMBER TO SELECT a number from the menu/////////");
-		}
-		switch(answerMenuProducts) {
-		case 0: 
-			System.out.println("Return to the initial menu ...");
-			break;
-		case 1:
-			if(!channels.SpaceForMoreProducts()){
-				createNewSerie(answerMenuProducts);
-				System.out.println("Serie information has been saved successfully");
-			}else{
-				System.out.println("----------------------------------------------------------");
-				System.out.println("");
-				System.out.println("There are already 85 registered products");
-				System.out.println("");
-				System.out.println("----------------------------------------------------------");
-			}
-			
-			break;
-		case 2:
-			if(!channels.SpaceForMoreProducts()){
-				createNewMovie(answerMenuProducts);
-				System.out.println("Movie information has been saved successfully");
-			}else{
-				System.out.println("----------------------------------------------------------");
-				System.out.println("");
-				System.out.println("There are already 85 registered products");
-				System.out.println("");
-				System.out.println("----------------------------------------------------------");
-			}
-			break;
-		}
-		
-	}
-	*/
-	/*
-	public void createNewSerie(int answerMenuProducts){
-		boolean out = false;
-		boolean censured=false;
-		String reason="";
-
-		do{
-			System.out.println("Ingresa la fecha de la primera emicion:");
-			System.out.print("Dia :");
-			int day=sc.nextInt();
-			
-			if(day>31 || day<0){
-				out=true;
-				System.out.println("ERROR Ningun month tiene mas de 31 dias.");
-			}
-			if(!out){
-				System.out.print("/Mes :");
-				int month=sc.nextInt();
-				if(month>12 || month<0){
-					out=true;
-					System.out.println("ERROR Ningun año tiene mas de 12 meses.");
-				}
-				if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12 ){
-					
-				}
-				if(month==4 || month==6 || month==9 || month==11){
-					if(day>30){
-						System.out.println("ERROR Este month tiene 30 dias.");
-						out=true;
-					}
-				}
-				if(month==2){
-					if(day>29){
-						System.out.println("ERROR Este month tiene 29 dias.");
-						out=true;
-					}
-					
-				}
-				if(!out){
-					System.out.print("/Año :");
-					int year=sc.nextInt();
-					if(year<0){
-						System.out.println(" ERROR no hay años negativos");
-						out=true;
-					}
-					if(!out){
-						System.out.println("Ingrese el nombre de los protagonistas ");
-						String nombresProtagonistas= sc.next();
-						sc.nextLine();
-						
-						System.out.println("Ingrese el nombre del director ");
-						String nameDirector= sc.next();
-						sc.nextLine();
-						
-						System.out.println("Ingrese la synopsis ");
-						String synopsis= sc.next();
-						sc.nextLine();
-						
-						System.out.println("Ingrese si la serie fue censored si si (1) si no (0) ");
-						int censored=sc.nextInt();
-						if(censored==1){
-							censured=true;
-							System.out.println("Ingrese el reason?");
-							reason= sc.next();
-							sc.nextLine();
-						}
-						System.out.println("Ingrese el numero de temporadas que tiene la serie");
-						int temporadas=sc.nextInt();
-						for(int x=0;x<temporadas;x++){
-							
-						}
-						//channels.addProduct(answerMenuProducts,day, month, year,nombresProtagonistas,nameDirector,synopsis,reason);
-						out=true;
-						
-					}
-				}
-			}
-			
-		}while(!out);
-	}
-	*/
-	/*
-	public void createNewMovie(int answerMenuProducts){
-		boolean out = false;
-		boolean censured=false;
-		String reason="";
-
-		do{
-			System.out.println("Ingresa la fecha de estreno a nivel mundial ");
-			System.out.print("Dia :");
-			int day=sc.nextInt();
-			
-			if(day>31 || day<0){
-				out=true;
-				System.out.println("ERROR Ningun month tiene mas de 31 dias.");
-			}
-			if(!out){
-				System.out.print("/Mes :");
-				int month=sc.nextInt();
-				if(month>12 || month<0){
-					out=true;
-					System.out.println("ERROR Ningun año tiene mas de 12 meses.");
-				}
-				if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12 ){
-					
-				}
-				if(month==4 || month==6 || month==9 || month==11){
-					if(day>30){
-						System.out.println("ERROR Este month tiene 30 dias.");
-						out=true;
-					}
-				}
-				if(month==2){
-					if(day>29){
-						System.out.println("ERROR Este month tiene 29 dias.");
-						out=true;
-					}
-					
-				}
-				if(!out){
-					System.out.print("/Año :");
-					int year=sc.nextInt();
-					if(year<0){
-						System.out.println(" ERROR no hay años negativos");
-						out=true;
-					}
-					if(!out){
-						System.out.println("Ingrese el titulo original ");
-						String tituloOriginal= sc.next();
-						sc.nextLine();
-						
-						System.out.println("Ingrese el nombre del director ");
-						String nameDirector= sc.next();
-						sc.nextLine();
-						
-						System.out.println("Ingrese el nombre de la producer ");
-						String producer= sc.next();
-						sc.nextLine();
-						
-						System.out.println("Ingrese la synopsis ");
-						String synopsis= sc.next();
-						sc.nextLine();
-						
-						System.out.println("Ingrese si la edad minima para ver la pelicula ");
-						int minimumAge=sc.nextInt();
-						
-						System.out.println("Ingrese la category ((1)ROMANTIC, (2)ACTION, (3)SUSPENSE, (4)TERROR, (5)COMEDY)");
-						int category=sc.nextInt();
-						
-						System.out.println("Ingrese el trailer ");
-						String trailer= sc.next();
-						sc.nextLine();
-						
-						//channels.addProduct(answerMenuProducts,nameDirector,producer,synopsis,day, month, year,tituloOriginal,minimumAge,category,trailer);
-						out=true;
-						
-					}
-				}
-			}
-			
-		}while(!out);
-	}
-	*/
-	//--------------------------------------------------------------------------------------------------------------------------------------------------
 	/**
     *This method is the method that the menu contains when the subscriber management option is selected.</br>
    

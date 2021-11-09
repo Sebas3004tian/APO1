@@ -35,6 +35,15 @@ public class Serie extends Product {
 		
 		
 	}
+	/**
+    * This method adds a season to an already created serial object.</br>
+    * @param numScheduledEpi int
+	* @param numEpiPub int
+	* @param day int
+	* @param month int
+	* @param year int
+	* @param trailer String
+    */
 	public void addSeason(int numScheduledEpi,int numEpiPub,int day,int month,int year,String trailer){
 		for(int x=0;x<200;x++){
 			if(seasons[x]==null){

@@ -113,6 +113,9 @@ public class ColombianChannel {
 		
 	}
 	//--------------------------------------------------------------------------------------------------------------------------------------------------SEGUIMIENTO12
+	/**
+    * This method shows the 5 options that can be made in the product management section, it also receives the response input.</br>
+	*/
 	public int createProductMenu(){
 		System.out.println("");
 		System.out.println("-------------------------------------------------------------------------------------------------------------");
@@ -134,6 +137,10 @@ public class ColombianChannel {
 
 		return answer;
 	}
+	/**
+    * In this method you choose what you want to do (5 options) in the product management section.</br>
+    * @param answerMenuProducts int, number from (0 to 5).
+    */
 	public void optionMenuProduct(int answerMenuProducts) {
 		if(answerMenuProducts!=0&&answerMenuProducts!=1&&answerMenuProducts!=2&&answerMenuProducts!=3&&answerMenuProducts!=4&&answerMenuProducts!=5){
 			System.out.println("///////REMEMBER TO SELECT a number from the menu/////////");
@@ -169,9 +176,15 @@ public class ColombianChannel {
 		}
 		
 	}
+	/**
+    * This method prints a method located in the BlackSanail class that is in charge of listing all the series registered with their last season</br>
+	*/
 	public void listSeries(){
 		System.out.println(channels.listSerie());
 	}
+	/**
+    * This method prints a method that stores information about the movies depending on their category, the calling method is in the BlackSnail class</br>
+    */
 	public void listMovies(){
 		boolean out = false;
 		do{
@@ -193,7 +206,9 @@ public class ColombianChannel {
 			}
 		}while(!out);
 	}
-
+	/**
+    * This method is in charge of calling the methods that create a next season of a series that is in the BlackSnail class</br>
+    */
 	public void createSeason(){
 		boolean out = false;
 		int day=0;
@@ -305,6 +320,9 @@ public class ColombianChannel {
 		
 		
 	}
+	/**
+    * This method is in charge of asking for the name of the product, calling the method that validates the name and then printing the method that stores the product information.</br>
+    */
 	public void inforProduct(){
 		System.out.println("Enter the name of the product you want to search for:");
 		sc.nextLine();
@@ -312,6 +330,9 @@ public class ColombianChannel {
 		System.out.println(channels.searchProduct(productName));
 		
 	}
+	/**
+    *This method is in charge of creating a new product (movie or series), it also calls the validation methods that store the data in the BlackSnail class.</br>
+    */
 	public void crearNuevoProducto(){
 		
 		int productType=0;

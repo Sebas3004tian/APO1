@@ -122,6 +122,10 @@ public class BlackSnail {
 	}
 	//------------------------------------------------------------------------------------------------SEGUIMIENTO12---------------------------------------
 	//----------------------------------------------------SON METODOS DE PRUEBA
+	/**
+    * This method does not belong to exercise, but it works to display all the stored information of the movie type products.</br>
+    * @return films String, It is a chain of all the information of all the stored movies.
+    */
 	public String showMovie(){
 		String films="";
 		for(int x=0;x<85;x++){
@@ -134,6 +138,10 @@ public class BlackSnail {
 		}
 		return films;
 	}
+	/**
+    * This method does not belong to exercise, but it works to display all the stored information of the Series type products.</br>
+    * @return series String, It is a chain of all the information of all the stored series.
+    */
 	public String showSeries(){
 		String series="";
 		for(int x=0;x<85;x++){
@@ -148,6 +156,10 @@ public class BlackSnail {
 		return series;
 	}
 	//------------------------------------------------
+	/**
+    *This method is in charge of validating if there is space to register more products </br>
+    * @return thereIsNot boolean,If true it means that there is no space to record more.
+    */
 	public boolean SpaceForMoreProducts(){
 		/*boolean thereIsNot=false;
 		for(int x=0;x<85;x++){
@@ -179,7 +191,10 @@ public class BlackSnail {
 		
 		
 	}
-	
+	/**
+    * This method is in charge of creating a String chain where it stores the information of all the series with its last season.</br>
+    * @return listseries String, String string with all the information to print
+    */
 	public String listSerie(){
 		String listseries="";
 		int accountant=1;
@@ -192,6 +207,11 @@ public class BlackSnail {
 		}
 		return listseries;
 	}
+	/**
+    * This method, according to the selected category, creates a chain of Strings where it stores a list of all the movies of that chosen category.</br>
+    * @param category int
+    * @return listMovies String, chain with all the information of the movies of that selected category
+    */
 	public String listMoviesCategory(int category){
 		int accountant=1;
 		String listMovies="";
@@ -241,6 +261,16 @@ public class BlackSnail {
 	
 		return listMovies;
 	}
+	/**
+    * This method is responsible for creating another season for an already created series, and for this it calls a method of the Series subclass.</br>
+    * @param seriesName String
+	* @param numScheduledEpi int
+	* @param numEpiPub int
+	* @param day int
+	* @param month int
+	* @param year int
+	* @param trailer String
+    */
 	public void createOtherSeason(String seriesName,int numScheduledEpi,int numEpiPub,int day,int month,int year,String trailer){
 	String synopsis;
 	String nameDirector;
@@ -260,6 +290,11 @@ public class BlackSnail {
 		}
 		
 	}
+	/**
+    * This method is in charge of checking if the name of the series that the user entered if it is registered</br>
+    * @param seriesName String
+    * @return registered boolean,If it is true it means that if it is registered
+    */
 	public boolean validateSeriesName(String seriesName){
 		boolean registered=false;
 		for(int x=0;x<85;x++){
@@ -277,6 +312,11 @@ public class BlackSnail {
 		
 		return registered;
 	}
+	/**
+    * This method is in charge of validating if the name to be registered for a product is already registered.</br>
+    * @param productName String
+    * @return registered boolean,If it is true it means that if it is registered
+    */
 	public boolean validateProductName(String productName){
 		boolean registered=false;
 		for(int x=0;x<85;x++){
@@ -300,7 +340,11 @@ public class BlackSnail {
 		
 		return registered;
 	}
-	
+	/**
+    * This method searches for the product with the name that the user enters</br>
+    * @param productName String
+    * @return productInformation String,It depends on whether you find (product information) or not the product (product message not found).
+    */
 	public String searchProduct(String productName){
 		String productInformation="";
 		for(int x=0;x<85;x++){
@@ -332,6 +376,25 @@ public class BlackSnail {
 	
 	//public void addProduct(int productType,String nameDirector,String synopsis,int day,int month,int year,String tituloOriginal,String producer,int minimumAge,int category,String trailer,String allProtagonists,int censored,String reason,int numSeasonsSeries,int seasonNumber,int numScheduledEpi,int numEpiPub,int [] cantEpiProgramados){
 	//public void addProduct(int productType,String nameDirector,String synopsis,int day,int month,int year,String productName,String producer,int minimumAge,int category,String trailer,String allProtagonists,int censored,String reason,int numSeasonsSeries,int seasonNumber,int numScheduledEpi,int numEpiPub,int [] cantEpiProgramados,int [] cantEpiPublicados,int [] diaArray,int [] mesArray,int [] anoArray,String [] trailerArray){
+	/**
+    * This method is responsible for creating the objects depending on the type of product that the user chose</br>
+	* @param productType int
+	* @param nameDirector String
+	* @param synopsis String
+	* @param day int
+	* @param month int
+	* @param year int
+	* @param productName String
+	* @param producer String
+	* @param minimumAge int
+	* @param category int
+	* @param trailer String
+	* @param allProtagonists String
+	* @param censored int
+	* @param reason String
+	* @param numScheduledEpi int
+	* @param numEpiPub int
+    */
 	public void addProduct(int productType,String nameDirector,String synopsis,int day,int month,int year,String productName,String producer,int minimumAge,int category,String trailer,String allProtagonists,int censored,String reason,int numScheduledEpi,int numEpiPub){
 		if(productType==1){
 			for(int x=0;x<85;x++){
@@ -479,6 +542,13 @@ public class BlackSnail {
 	}
 	
 	//Metodo para ver informacion---------------------------------------------------------------------------------------------------------------------
+	/**
+    * Descripción: ¿qué hace mi método? (concisa, un par de líneas)</br>
+    * <b> pre:</b> ¿cuáles son las condiciones sobre las variables globales? --> si hay una condición sobre var glob. </br>
+    * <b> pos:</b> ¿Cuales fueron los cambios sobre las variables globales? --> si ocurrio un cambio cn var glob.
+    * @param <nombre_par> <tipo>, condiciones sobre el parametro --> si tiene
+    * @return <nombre_var> <tipo>, informacion sobre variable de retorno --> retorno
+    */
 	public String AllSuscriptor(){
 		String allSuscriptorRegistered="";
 

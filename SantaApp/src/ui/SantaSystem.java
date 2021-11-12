@@ -126,7 +126,8 @@ public class SantaSystem {
 										String comportamiento=sc.nextLine();
 										if(comportamiento.equalsIgnoreCase("GOOD")||comportamiento.equalsIgnoreCase("NAUGHTY")){
 											if(!out){
-												santa.addChild(nombre,apellido,edad,direccion,ciudad,pais,deseo,comportamiento);
+												String dirrecionTotal=direccion+" de "+ciudad+", "+pais;
+												santa.addChild(nombre,apellido,edad,dirrecionTotal,deseo,comportamiento);
 												System.out.println("Informacion guardada, pronto tendras tu regalo ");
 												out=true;
 											}
@@ -149,9 +150,53 @@ public class SantaSystem {
 	}
 	public void cambiarChildEstado(){
 		
-		
-		
-		
+		boolean out = false;
+		do{
+			System.out.println("Ingresa el nombre del niño: ");
+			sc.nextLine();
+			String nombreChild=sc.nextLine();
+			if(nombreChild.equals("")){
+				System.out.println("Debes escribir algo...");
+				out=true;
+			}
+			if(!out){
+				System.out.println("Ingresa los apellidos del niño: ");
+				String apellidoChild=sc.nextLine();
+				if(apellidoChild.equals("")){
+					System.out.println("Debes escribir algo...");
+					out=true;
+				}
+				if(!out){
+					System.out.println("Ingresa la edad del niño: ");
+					int edadChild=sc.nextInt();
+					if(edadChild<=0){
+						System.out.println("La edad no debe ser menor o de 0 creo..");
+						out=true;
+					}
+					if(!out){
+						System.out.println("A que lista pertenece el niño : (GOOD OR NAUGHTY) ");
+						sc.nextLine();
+						String tipoLista=sc.nextLine();
+						if(tipoLista.equalsIgnoreCase("GOOD")||tipoLista.equalsIgnoreCase("NAUGHTY")){
+							if(!out){
+								int pocision=santa.verificarChild(nombreChild,apellidoChild,edadChild,tipoLista);
+								if(pocision!=-1){
+									santa.cambiarLista(nombreChild,apellidoChild,edadChild,tipoLista,pocision);
+									System.out.println("Cambio realizado con exito ");
+									out=true;
+								}else{
+									System.out.println("Ups...Parece que los datos no han sido encontrados");
+									out=true;
+								}
+							}
+						}else{
+							System.out.println("Por favor escribe alguna de las 2 opciones.");
+							out=true;
+						}
+					}
+				}
+			}
+		}while(!out);	
 	}
 	public void showList(){
 		boolean out = false;

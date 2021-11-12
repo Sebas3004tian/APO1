@@ -109,11 +109,11 @@ public class Child implements  Comparable<Child>{
 
 		return "\n"+"**** Child data****"+
 		"\n"+"------------------------------"+
-		"\n"+"El nombre es : "+getNombre()+
-		"\n"+"El apellido es : "+getApellido()+
-		"\n"+"Su edad es : "+getEdad()+
-		"\n"+"Su direccion es : "+getDirrecionTotal()+
-		"\n"+"Y su deseo es : "+getDeseo()+"\n"
+		"\n"+"The name is : "+getNombre()+
+		"\n"+"The last name is : "+getApellido()+
+		"\n"+"Your age is:"+getEdad()+
+		"\n"+"The direction is : "+getDirrecionTotal()+
+		"\n"+"And your wish is: "+getDeseo()+"\n"
 		+"--------------------------------------------------------------"+"\n";
 
 	}

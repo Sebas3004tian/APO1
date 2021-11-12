@@ -97,7 +97,7 @@ public class SantaApp{
 		if(tipoLista.equalsIgnoreCase("GOOD")){
 			lista+="        GOOD         "+"\n";
 			if(goodChildsList.size()==0){
-				lista="UPS.. parece que no hay childs en esta lista.";
+				lista="UPS .. looks like there are no childs on this list.";
 			}
 			for(int x=0;x<goodChildsList.size();x++){
 				
@@ -107,7 +107,7 @@ public class SantaApp{
 		if(tipoLista.equalsIgnoreCase("NAUGHTY")){
 			lista+="        NAUGHTY         "+"\n";
 			if(naughtyChildsList.size()==0){
-				lista="UPS.. parece que no hay childs en esta lista.";
+				lista="UPS .. looks like there are no childs on this list.";
 			}
 			for(int i=0;i<naughtyChildsList.size();i++){
 				

@@ -105,7 +105,7 @@ public class SantaApp{
 	/**
     * DMetodo encargado de mostrar la lista que quiere el usuarion pór medio de una cadena
     * @param tipoLista String
-    * @return lista String, informacion sobre variable de retorno --> retorno
+    * @return lista String
     */
 	public String showList(String tipoLista){
 		String lista="";
@@ -136,11 +136,12 @@ public class SantaApp{
 		return lista;
 	}
 	/**
-    * Descripción: ¿qué hace mi método? (concisa, un par de líneas)</br>
-    * <b> pre:</b> ¿cuáles son las condiciones sobre las variables globales? --> si hay una condición sobre var glob. </br>
-    * <b> pos:</b> ¿Cuales fueron los cambios sobre las variables globales? --> si ocurrio un cambio cn var glob.
-    * @param <nombre_par> <tipo>, condiciones sobre el parametro --> si tiene
-    * @return <nombre_var> <tipo>, informacion sobre variable de retorno --> retorno
+    * Metodo encargado de verificar si hay el child existe en alguna lista
+	* @param nombreChild String
+	* @param apellidoChild String
+	* @param edadChild int
+	* @param tipoLista String
+    * @return existe int,Si es -1 no encontro al child,y si es cualquier otro numero es la posicion del child en el arraylist
     */
 	public int verificarChild(String nombreChild,String apellidoChild,int edadChild,String tipoLista){
 		int existe=-1;
@@ -169,11 +170,12 @@ public class SantaApp{
 		return existe;
 	}
 	/**
-    * Descripción: ¿qué hace mi método? (concisa, un par de líneas)</br>
-    * <b> pre:</b> ¿cuáles son las condiciones sobre las variables globales? --> si hay una condición sobre var glob. </br>
-    * <b> pos:</b> ¿Cuales fueron los cambios sobre las variables globales? --> si ocurrio un cambio cn var glob.
-    * @param <nombre_par> <tipo>, condiciones sobre el parametro --> si tiene
-    * @return <nombre_var> <tipo>, informacion sobre variable de retorno --> retorno
+    * Metodo encargado de cambiar a un CHild de una lista a otra 
+	* @param nombreChild String
+	* @param apellidoChild String
+	* @param edadChild int
+	* @param tipoLista String
+	* @param pocision int
     */
 	public void cambiarLista(String nombreChild,String apellidoChild,int edadChild,String tipoLista,int pocision){
 		String nombre="";

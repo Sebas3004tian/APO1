@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"model","l":"Child"},{"p":"model","l":"Estado"},{"p":"model","l":"SantaApp"},{"p":"ui","l":"SantaSystem"}];updateSearchResults();

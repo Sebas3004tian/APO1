@@ -10,13 +10,24 @@ public class SantaApp{
 	private ArrayList<Child> naughtyChildsList ;
 	private Child otherChild;
 	private Child childToChange;
-	
+	/**
+    * Metodo constructor de la clase
+    */
 	public SantaApp(){
 		
 		goodChildsList = new ArrayList <Child>();
 		naughtyChildsList = new ArrayList <Child>();
 		
 	}
+	/**
+    * Este metodo se encarga de crear un objeto Child en una lista de good o naughty dependiendo del usuario
+    * @param nombre String
+	* @param apellido String
+	* @param edad int
+	* @param dirrecionTotal String
+	* @param deseo String
+	* @param comportamiento String
+    */
 	public void addChild(String nombre,String apellido,int edad,String dirrecionTotal,String deseo,String comportamiento){
 		//System.out.println(goodChildsList.size());
 		//String dirrecionTotal=direccion+" de "+ciudad+", "+pais;
@@ -91,11 +102,18 @@ public class SantaApp{
 		
 		
 	}
+	/**
+    * DMetodo encargado de mostrar la lista que quiere el usuarion pór medio de una cadena
+    * @param tipoLista String
+    * @return lista String, informacion sobre variable de retorno --> retorno
+    */
 	public String showList(String tipoLista){
 		String lista="";
 		
 		if(tipoLista.equalsIgnoreCase("GOOD")){
 			lista+="        GOOD         "+"\n";
+			
+			lista+="------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"+"\n";
 			if(goodChildsList.size()==0){
 				lista="UPS .. looks like there are no childs on this list.";
 			}
@@ -106,6 +124,7 @@ public class SantaApp{
 		}
 		if(tipoLista.equalsIgnoreCase("NAUGHTY")){
 			lista+="        NAUGHTY         "+"\n";
+			lista+="------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"+"\n";
 			if(naughtyChildsList.size()==0){
 				lista="UPS .. looks like there are no childs on this list.";
 			}
@@ -116,6 +135,13 @@ public class SantaApp{
 		}
 		return lista;
 	}
+	/**
+    * Descripción: ¿qué hace mi método? (concisa, un par de líneas)</br>
+    * <b> pre:</b> ¿cuáles son las condiciones sobre las variables globales? --> si hay una condición sobre var glob. </br>
+    * <b> pos:</b> ¿Cuales fueron los cambios sobre las variables globales? --> si ocurrio un cambio cn var glob.
+    * @param <nombre_par> <tipo>, condiciones sobre el parametro --> si tiene
+    * @return <nombre_var> <tipo>, informacion sobre variable de retorno --> retorno
+    */
 	public int verificarChild(String nombreChild,String apellidoChild,int edadChild,String tipoLista){
 		int existe=-1;
 		if(tipoLista.equalsIgnoreCase("GOOD")){
@@ -142,6 +168,13 @@ public class SantaApp{
 		}
 		return existe;
 	}
+	/**
+    * Descripción: ¿qué hace mi método? (concisa, un par de líneas)</br>
+    * <b> pre:</b> ¿cuáles son las condiciones sobre las variables globales? --> si hay una condición sobre var glob. </br>
+    * <b> pos:</b> ¿Cuales fueron los cambios sobre las variables globales? --> si ocurrio un cambio cn var glob.
+    * @param <nombre_par> <tipo>, condiciones sobre el parametro --> si tiene
+    * @return <nombre_var> <tipo>, informacion sobre variable de retorno --> retorno
+    */
 	public void cambiarLista(String nombreChild,String apellidoChild,int edadChild,String tipoLista,int pocision){
 		String nombre="";
 		String apellido="";

@@ -14,7 +14,13 @@ public class Child implements  Comparable<Child>{
 	
 	
 	private Estado buenoOmalo;
-	
+	/**
+    * Descripción: ¿qué hace mi método? (concisa, un par de líneas)</br>
+    * <b> pre:</b> ¿cuáles son las condiciones sobre las variables globales? --> si hay una condición sobre var glob. </br>
+    * <b> pos:</b> ¿Cuales fueron los cambios sobre las variables globales? --> si ocurrio un cambio cn var glob.
+    * @param <nombre_par> <tipo>, condiciones sobre el parametro --> si tiene
+    * @return <nombre_var> <tipo>, informacion sobre variable de retorno --> retorno
+    */
 	public Child(String nombre,String apellido,int edad,String dirrecionTotal,String deseo) {
 
 		this.nombre=nombre;
@@ -27,6 +33,13 @@ public class Child implements  Comparable<Child>{
 		this.edad=edad;
 		this.buenoOmalo=buenoOmalo;
 	}
+	/**
+    * Descripción: ¿qué hace mi método? (concisa, un par de líneas)</br>
+    * <b> pre:</b> ¿cuáles son las condiciones sobre las variables globales? --> si hay una condición sobre var glob. </br>
+    * <b> pos:</b> ¿Cuales fueron los cambios sobre las variables globales? --> si ocurrio un cambio cn var glob.
+    * @param <nombre_par> <tipo>, condiciones sobre el parametro --> si tiene
+    * @return <nombre_var> <tipo>, informacion sobre variable de retorno --> retorno
+    */
 	@Override
 	public int compareTo(Child otherChild){
 		return this.edad-otherChild.edad;

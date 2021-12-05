@@ -30,7 +30,12 @@ public class SystemDataCenter {
 		
 	}
 	public void inicioDataCenter() {
-		boolean salir=false;
+		try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e) {
+            
+        }
+		boolean out=false;
 		System.out.println(" ");
 		System.out.println(" ");
 		System.out.println("Bienvenido a la aplicacion de DataCenter.");
@@ -39,13 +44,13 @@ public class SystemDataCenter {
 		do{
 			double valorAlquilerGeneral= sc.nextDouble();
 			if(valorAlquilerGeneral>0){
-				salir=true;
+				out=true;
 				valorAlquiler=valorAlquilerGeneral;
 				center = new DataCenter(valorAlquilerGeneral);
 			}else{
 				System.out.println("Porfavor ingresa un valor valido!!");
 			}
-		}while(!salir);
+		}while(!out);
 		
 	}
 	public int MenuInicial(){
@@ -138,6 +143,7 @@ public class SystemDataCenter {
 			System.out.println(" ");
 			break;
 		case 1:
+			alquilarMiniRoom();
 			break;
 		case 2:
 			break;
@@ -145,6 +151,132 @@ public class SystemDataCenter {
 			break;
 		}
 		
+	}
+	public void alquilarMiniRoom(){
+		boolean out=false;
+		int day=0;
+		int month=0;
+		int year=0;
+		
+		System.out.println(" ");
+		System.out.println(" ");
+		System.out.println("Bienvenido al apartado de alquilar un minicuarto");
+		System.out.println(" ");
+		do{
+			System.out.println("Ingresa el numero del minicuarto que deseas alquilar: ");
+			String numeroCuarto= sc.next();
+			sc.nextLine();
+			
+			
+			if(center.miniRoomDisponible(numeroCuarto)){
+	
+				System.out.println("Ingresa la fecha de hoy: ");
+				System.out.println("Day : ");
+				day=sc.nextInt();
+				
+				
+				if(day>31 || day<0){
+					
+					System.out.println("ERROR No month has more than 31 days.");
+					out=true;
+					
+				}
+				if(!out){
+					
+					System.out.println("Month : ");
+					month=sc.nextInt();
+					if(month>12 || month<0){
+						System.out.println("ERROR No year has more than 12 months.");
+						out=true;
+						
+					}
+					if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12 ){
+						
+					}
+					if(month==4 || month==6 || month==9 || month==11){
+						if(day>30){
+							System.out.println("ERROR This month has 30 days.");
+							out=true;
+							
+						}
+					}
+					if(month==2){
+						if(month%4==0){
+							if(day>29){
+								System.out.println("ERROR This month has 29 days.");
+								out=true;
+								
+							}
+						}
+						if(month%4!=0){
+							if(day>28){
+								System.out.println("ERROR This month has 29 days.");
+								out=true;
+								
+							}
+						}					
+					}
+					if(!out){
+						
+						System.out.println("Year : ");
+						year=sc.nextInt();
+						if(year<0){
+							System.out.println("ERROR no negative years ");
+							out=true;
+							
+						}
+						if(!out){
+							System.out.println("Ingresa el numero de servidores que habra en el RACK:  ");
+							int numeroServidores=sc.nextInt();
+							if(numeroServidores<0){
+								System.out.println("Error... selecciona un numero mayor a o igual a 0");
+								out=true;
+							}
+							if(!out){
+								System.out.println("Ingresa a quien estara asignado el minicuarto:  ");
+								System.out.println("1.Proyecto de Investigacion");
+								System.out.println("2.Empresa");
+								int asignadoMiniRoom=sc.nextInt();
+								if(asignadoMiniRoom==1 || asignadoMiniRoom==2){
+									if(asignadoMiniRoom==1){
+										System.out.println("Ingresa el numero de registro del proyecto: ");
+										int numRegistroProyecto=sc.nextInt();
+										
+										//center.alquilarRoomProyecto(numeroCuarto,day,month,year,numeroServidores,numRegistroProyecto);
+										
+										
+									}
+									if(asignadoMiniRoom==2){
+										System.out.println("Ingresa el nit de la empresa: ");
+										String nit= sc.next();
+										sc.nextLine();
+										System.out.println("Ingresa el nombre de la empresa: ");
+										String nombreEmpresa= sc.next();
+										
+										//center.alquilarRoomEmpresa(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa);
+										
+
+									}
+									center.alquilarRoomEmpresa(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,numRegistroProyecto,asignadoMiniRoom);
+									out=true;
+								}else {
+									System.out.println(" ");
+									System.out.println("Por favor escoge 1 o 2");
+									System.out.println(" ");
+									out=true;
+								}
+							}
+						}
+					}
+				}
+			}else if(!center.miniRoomDisponible(numeroCuarto)){
+				System.out.println(" ");
+				System.out.println("El cuarto ingresado se encuentra ocupado o no existe,intenta con otro numero(tambien puedes revisar el mapa,para saber los numeros de cuartos disponibles)");
+				System.out.println(" ");
+				out=true;
+			}
+			
+		}while(!out);
 	}
 	public int MenuSimulacion(){
 		System.out.println(" ");

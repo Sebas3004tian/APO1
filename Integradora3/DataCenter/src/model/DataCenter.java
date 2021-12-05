@@ -13,8 +13,9 @@ public class DataCenter {
 	}
 	public String cambiarStringNumero(int j,int i){
 		j=j+1;
-		String [] numerosLetras= {"A","B","C","D","E","F","G","H"};
-		String numero=numerosLetras[i]+"";
+		i=i+1;
+		//String [] numerosLetras= {"A","B","C","D","E","F","G","H"};
+		String numero=i+"";
 		if(j<10){
 			numero=numero+"0"+j+"";
 		}else{
@@ -74,6 +75,71 @@ public class DataCenter {
 		}
 
 		return valorAlquiler;
+	}
+	public boolean miniRoomDisponible(String numeroCuarto){
+		boolean miniRoomEncontrada=false;
+		
+		String fila=numeroCuarto.substring(0,1);
+		String columna=numeroCuarto.substring(1,3);
+		
+		int intFila=Integer.parseInt(fila);
+		int intColumna=Integer.parseInt(columna);
+		
+		//System.out.println("fila:"+intFila+"columna:"+intColumna);
+		if(intFila>0 && intFila<9 && intColumna>0 && intColumna<51){
+			if(rooms[intColumna-1][intFila-1]==null){
+				miniRoomEncontrada=true;
+			}
+		}
+		
+		
+		return miniRoomEncontrada;
+		
+	}
+	public void alquilarRoomProyecto(String numeroCuarto,int day,int month,int year,int numeroServidores,int numRegistroProyecto){
+		boolean ventanaSIoNO=false;
+		String fila=numeroCuarto.substring(0,1);
+		String columna=numeroCuarto.substring(1,3);
+		
+		int intFila=Integer.parseInt(fila);
+		int intColumna=Integer.parseInt(columna);
+		int i=intFila-1;
+		int j=intColumna-1;
+		if(i==0 || i==7){
+			ventanaSIoNO=true;
+		}else if((intColumna-1)==0 || (intColumna-1)==49){
+			ventanaSIoNO=true;
+		}
+		double precio=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
+		if(numeroServidores<4){
+			precio=precio+(precio*0.15);
+		}
+		
+		
+	}
+	public void alquilarRoomEmpresa(String numeroCuarto,int day,int month,int year,int numeroServidores,String nit,String nombreEmpresa,int numRegistroProyecto,int asignadoMiniRoom){
+		boolean ventanaSIoNO=false;
+		String fila=numeroCuarto.substring(0,1);
+		String columna=numeroCuarto.substring(1,3);
+		
+		int intFila=Integer.parseInt(fila);
+		int intColumna=Integer.parseInt(columna);
+		int i=intFila-1;
+		int j=intColumna-1;
+		if(i==0 || i==7){
+			ventanaSIoNO=true;
+		}else if((intColumna-1)==0 || (intColumna-1)==49){
+			ventanaSIoNO=true;
+		}
+		double precio=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
+		if(numeroServidores<4){
+			precio=precio+(precio*0.15);
+		}
+		
+		
+		rooms[j][i] = new MiniCuartos(precio,numeroCuarto,day,month,year,numeroServidores,numRegistroProyecto,i,j,ventanaSIoNO);
+		
+		rooms[j][i] = new MiniCuartos(precio,numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,i,j,ventanaSIoNO);
 	}
 	public double getValorAlquilerGeneral() {
 		return valorAlquilerGeneral;

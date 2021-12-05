@@ -1,19 +1,19 @@
 package model;
 
 public class Empresa {
-	private int nit;
+	private String nit;
 	private String nombreEmpresa;
 	
-	public Canal(int nit, String nombreEmpresa) {
+	public Empresa(String nit, String nombreEmpresa) {
 		this.nit = nit;
 		this.nombreEmpresa = nombreEmpresa;
 		
 	}
-	public int getNit() {
+	public String getNit() {
 		return nit;
 	}
 
-	public void setNit(int nit) {
+	public void setNit(String nit) {
 		this.nit = nit;
 	}
 	public String getNombreEmpresa() {
@@ -22,5 +22,8 @@ public class Empresa {
 
 	public void setNombreEmpresa(String nombreEmpresa) {
 		this.nombreEmpresa = nombreEmpresa;
+	}
+	public String toString() {
+		return "Name: "nombreEmpresa +"NIT: " + nit ;
 	}
 }

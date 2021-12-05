@@ -7,6 +7,8 @@ public class Servidor {
 	private double cantMemoriaRAM;
 	private int cantDiscos;
 	private double capaDiscos;
+	
+	private Marca procesador;
 
 
 	public Servidor(double cantMemoriaCache,int numProcesadores,double cantMemoriaRAM,int cantDiscos,double capaDiscos) {
@@ -56,6 +58,13 @@ public class Servidor {
 
 	public void setCapaDiscos(double capaDiscos) {
 		this.capaDiscos = capaDiscos;
+	}
+	public Marca getProcesador() {
+		return procesador;
+	}
+
+	public void setProcesador(Marca procesador) {
+		this.procesador = procesador;
 	}
 	
 }

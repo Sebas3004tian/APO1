@@ -92,11 +92,88 @@ public class DataCenter {
 			}
 		}
 		
+		return miniRoomEncontrada;
+		
+	}
+	public String capacidadRACK(String numeroCuarto){
+		String capacidadTotalRack="";
+		
+		String fila=numeroCuarto.substring(0,1);
+		String columna=numeroCuarto.substring(1,3);
+		
+		int intFila=Integer.parseInt(fila);
+		int intColumna=Integer.parseInt(columna);
+		
+		int i=intFila-1;
+		int j=intColumna-1;
+		
+		capacidadTotalRack=rooms[j][i].calcularCapacidadTotalProcesamiento();
+		
+		return capacidadTotalRack;
+		
+	}
+	public String capacidadTodosRACK(String nombreEmpresa){
+		String capacidadTotalTodosRack="";
+		double totalRam=0;
+		double totalDisco=0;
+		
+		for (int i=0; i< rooms.length; i++ ) { 
+			for (int j = 0; j < rooms[0].length; j++) { 
+				if(rooms[j][i].getNombreEmpresa().equals(nombreEmpresa)){
+					totalDisco=+rooms[j][i].capacidadServidoresDisco();
+					totalRam=+rooms[j][i].capacidadServidoresRAM();
+					
+				}
+				
+				
+			}
+			
+		}
+		capacidadTotalTodosRack="La capadidad total de disco es de "+totalDisco+" teras."+"\n"+"El total de memoria RAM es de "+totalRam+" GB";
+		
+		return capacidadTotalTodosRack;
+		
+	}
+	public void cancelarAlquiler(String numeroCuarto){
+		String fila=numeroCuarto.substring(0,1);
+		String columna=numeroCuarto.substring(1,3);
+		
+		int intFila=Integer.parseInt(fila);
+		int intColumna=Integer.parseInt(columna);
+		
+		int i=intFila-1;
+		int j=intColumna-1;
+		rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.DISPONIBLE);
+		rooms[j][i]=null;
+	}
+	public void cancelarTodasHabitaciones(){
+		
+	}
+	public boolean miniRoomAlquilada(String numeroCuarto){
+		boolean miniRoomEncontrada=false;
+		
+		String fila=numeroCuarto.substring(0,1);
+		String columna=numeroCuarto.substring(1,3);
+		
+		int intFila=Integer.parseInt(fila);
+		int intColumna=Integer.parseInt(columna);
+		
+		int i=intFila-1;
+		int j=intColumna-1;
+		
+		EstadoAlquiler estadoRoom=EstadoAlquiler.ALQUILADO;
+		
+		
+		if(intFila>0 && intFila<9 && intColumna>0 && intColumna<51){
+			if(rooms[j][i].getEstadoDeAlquiler()==estadoRoom){
+				miniRoomEncontrada=true;
+			}
+		}
 		
 		return miniRoomEncontrada;
 		
 	}
-	public void alquilarRoomProyecto(String numeroCuarto,int day,int month,int year,int numeroServidores,int numRegistroProyecto){
+	public void alquilarRoom(String numeroCuarto,int day,int month,int year,int numeroServidores,String nit,String nombreEmpresa,int numRegistroProyecto,int asignadoMiniRoom){
 		boolean ventanaSIoNO=false;
 		String fila=numeroCuarto.substring(0,1);
 		String columna=numeroCuarto.substring(1,3);
@@ -114,11 +191,26 @@ public class DataCenter {
 		if(numeroServidores<4){
 			precio=precio+(precio*0.15);
 		}
+		if(asignadoMiniRoom==1){
+			rooms[j][i] = new MiniCuartos(precio,numeroCuarto,day,month,year,numeroServidores,numRegistroProyecto,i,j,ventanaSIoNO);
+			/*rooms[j][i].setEstado(Estado.ENCENDIDO);
+			rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.ALQUILADO);*/
+		}
+		if(asignadoMiniRoom==2){
+			rooms[j][i] = new MiniCuartos(precio,numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,i,j,ventanaSIoNO);
+			
+			/*rooms[j][i].setEstado(Estado.ENCENDIDO);
+			rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.ALQUILADO);*/
+		}
+		
+		rooms[j][i].setEstado(Estado.ENCENDIDO);
+		rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.ALQUILADO);
+		
+		
 		
 		
 	}
-	public void alquilarRoomEmpresa(String numeroCuarto,int day,int month,int year,int numeroServidores,String nit,String nombreEmpresa,int numRegistroProyecto,int asignadoMiniRoom){
-		boolean ventanaSIoNO=false;
+	public void anadirServidor(String numeroCuarto,int x,double cantMemoriaCache,int numProcesadores,int marcaProcesador,double cantMemoriaRAM,int cantDiscos,double capaDiscos){
 		String fila=numeroCuarto.substring(0,1);
 		String columna=numeroCuarto.substring(1,3);
 		
@@ -126,20 +218,7 @@ public class DataCenter {
 		int intColumna=Integer.parseInt(columna);
 		int i=intFila-1;
 		int j=intColumna-1;
-		if(i==0 || i==7){
-			ventanaSIoNO=true;
-		}else if((intColumna-1)==0 || (intColumna-1)==49){
-			ventanaSIoNO=true;
-		}
-		double precio=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
-		if(numeroServidores<4){
-			precio=precio+(precio*0.15);
-		}
-		
-		
-		rooms[j][i] = new MiniCuartos(precio,numeroCuarto,day,month,year,numeroServidores,numRegistroProyecto,i,j,ventanaSIoNO);
-		
-		rooms[j][i] = new MiniCuartos(precio,numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,i,j,ventanaSIoNO);
+		rooms[j][i].addServidor(x,cantMemoriaCache,numProcesadores,marcaProcesador,cantMemoriaRAM,cantDiscos,capaDiscos);
 	}
 	public double getValorAlquilerGeneral() {
 		return valorAlquilerGeneral;

@@ -118,7 +118,7 @@ public class SystemDataCenter {
 		System.out.println(" ");
 		System.out.println("(1). Alquilar  un minicuarto");
 		System.out.println("(2). Cancelar el alquiler para un minicuarto");
-		System.out.println("(3). Cancelar el alquiler para todos los minicuartos");
+		System.out.println("(3). Cancelar el alquiler para todos los minicuartos de una empresa");
 		System.out.println("(0). Volver al menu principal");
 		int respuesta=sc.nextInt();
 
@@ -146,11 +146,47 @@ public class SystemDataCenter {
 			alquilarMiniRoom();
 			break;
 		case 2:
+			cancelarMiniRoom();
 			break;
-		case 3: 
+		case 3:
+			cancelarTodosMiniRoom();		
 			break;
 		}
 		
+	}
+	public void cancelarTodosMiniRoom(){
+		boolean out=false;
+		do{
+			System.out.println("Ingresa el nombre de la empresa para cancelar el alquiler de todas las habitaciones asociadas: ");
+			String nombreEmpresa= sc.next();
+			sc.nextLine();
+			System.out.println("Antes de proceder a la cancelacion la capacidad de procesamiento del RACK de esta habitacion es:");
+			System.out.println("--------------------------------------------------------------------------");
+			System.out.println(center.capacidadTodosRACK(nombreEmpresa));
+			System.out.println("--------------------------------------------------------------------------");
+			System.out.println("El alquiler de las habtiaciones a nombre de la empresa "+nombreEmpresa+" han sido canceladas con exito.");
+			
+		}while(!out);
+	}
+	public void cancelarMiniRoom(){
+		boolean out=false;
+		do{
+			System.out.println("Ingresa el numero del minicuarto que deseas cancelar el alquiler: ");
+			String numeroCuarto= sc.next();
+			sc.nextLine();
+			
+			
+			if(center.miniRoomAlquilada(numeroCuarto)){
+				System.out.println("Antes de proceder a la cancelacion la capacidad de procesamiento del RACK de esta habitacion es:");
+				System.out.println("--------------------------------------------------------------------------");
+				System.out.println(center.capacidadRACK(numeroCuarto));
+				System.out.println("--------------------------------------------------------------------------");
+				center.cancelarAlquiler(numeroCuarto);
+				System.out.println("El alquiler de la habtiacion numero "+numeroCuarto+" ha sido cancelado con exito.");
+			}else if (!center.miniRoomAlquilada(numeroCuarto)){
+				System.out.println("La habitacion no ha sido encontrada, o  no esta en estado ALQUILADO,por favor verifica el mapa de estados de las habitaciones.");
+			}
+		}while(!out);
 	}
 	public void alquilarMiniRoom(){
 		boolean out=false;
@@ -226,7 +262,7 @@ public class SystemDataCenter {
 							
 						}
 						if(!out){
-							System.out.println("Ingresa el numero de servidores que habra en el RACK:  ");
+							System.out.println("Ingresa el numero de rack que habra en el RACK:  ");
 							int numeroServidores=sc.nextInt();
 							if(numeroServidores<0){
 								System.out.println("Error... selecciona un numero mayor a o igual a 0");
@@ -238,9 +274,12 @@ public class SystemDataCenter {
 								System.out.println("2.Empresa");
 								int asignadoMiniRoom=sc.nextInt();
 								if(asignadoMiniRoom==1 || asignadoMiniRoom==2){
+									int numRegistroProyecto=0;
+									String nit="";
+									String nombreEmpresa="";
 									if(asignadoMiniRoom==1){
 										System.out.println("Ingresa el numero de registro del proyecto: ");
-										int numRegistroProyecto=sc.nextInt();
+										numRegistroProyecto=sc.nextInt();
 										
 										//center.alquilarRoomProyecto(numeroCuarto,day,month,year,numeroServidores,numRegistroProyecto);
 										
@@ -248,16 +287,17 @@ public class SystemDataCenter {
 									}
 									if(asignadoMiniRoom==2){
 										System.out.println("Ingresa el nit de la empresa: ");
-										String nit= sc.next();
+										nit= sc.next();
 										sc.nextLine();
 										System.out.println("Ingresa el nombre de la empresa: ");
-										String nombreEmpresa= sc.next();
+										nombreEmpresa= sc.next();
 										
 										//center.alquilarRoomEmpresa(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa);
 										
 
 									}
-									center.alquilarRoomEmpresa(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,numRegistroProyecto,asignadoMiniRoom);
+									center.alquilarRoom(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,numRegistroProyecto,asignadoMiniRoom);
+									anadirServidor(numeroCuarto,numeroServidores);
 									out=true;
 								}else {
 									System.out.println(" ");
@@ -277,6 +317,91 @@ public class SystemDataCenter {
 			}
 			
 		}while(!out);
+	}
+	public void anadirServidor(String numeroCuarto,int numeroServidores){
+		boolean out=false;
+		double cantMemoriaCache=0;
+		int numProcesadores=0;
+		int marcaProcesador=0;
+		double cantMemoriaRAM=0;
+		int cantDiscos=0;
+		double capaDiscos=0;
+		System.out.println(" ");
+		System.out.println("A continuacion ingresa la informacion de cada servidor en el RACK");
+		System.out.println(" ");
+		for(int x=0;x<numeroServidores;x++){
+			cantMemoriaCache=0;
+			numProcesadores=0;
+			marcaProcesador=0;
+			cantMemoriaRAM=0;
+			cantDiscos=0;
+			capaDiscos=0;
+			System.out.println("Servidor "+(x+1)+" --------------------------------------------------------");
+			do{
+				System.out.println("Ingresa la cantidad de memoria cache en GB:");
+				cantMemoriaCache=sc.nextDouble();
+				if(cantMemoriaCache<0){
+					System.out.println("La memoria cache no puede ser negativa.");
+				}else{
+					out=true;
+				}
+			}while(!out);
+			out=false;
+			do{
+				System.out.println("Ingresa el numero de procesadores:");
+				numProcesadores=sc.nextInt();
+				if(numProcesadores<0){
+					System.out.println("El numero de procesadores no puede ser negativo.");
+				}else{
+					out=true;
+				}
+			}while(!out);
+			out=false;
+			do{
+				System.out.println("Ingresa la marca del procesador: ");
+				System.out.println("1.INTEL");
+				System.out.println("2.AMD");
+				marcaProcesador=sc.nextInt();
+				if(marcaProcesador!=1 && marcaProcesador!=2){
+					System.out.println("Solo puedes seleccionar INTEL o AMD");
+				}else{
+					out=true;
+				}
+			}while(!out);
+			out=false;
+			do{
+				System.out.println("Ingresa la cantidad de memoria RAM en GB:");
+				cantMemoriaRAM=sc.nextDouble();
+				if(cantMemoriaRAM<0){
+					System.out.println("La memoria RAM no puede ser negativa.");
+				}else{
+					out=true;
+				}
+			}while(!out);
+			out=false;
+			do{
+				System.out.println("Ingresa la cantidad de discos:");
+				cantDiscos=sc.nextInt();
+				if(cantDiscos<0){
+					System.out.println("El numero de discos no puede ser negativo.");
+				}else{
+					out=true;
+				}
+			}while(!out);
+			out=false;
+			do{
+				System.out.println("Ingresa la capacidad de los discos en teras:");
+				capaDiscos=sc.nextDouble();
+				if(capaDiscos<0){
+					System.out.println("La capacidad de los discos no puede ser negativa.");
+				}else{
+					out=true;
+				}
+			}while(!out);
+			center.anadirServidor(numeroCuarto,x,cantMemoriaCache,numProcesadores,marcaProcesador,cantMemoriaRAM,cantDiscos,capaDiscos);
+			out=false;
+				
+		}
 	}
 	public int MenuSimulacion(){
 		System.out.println(" ");

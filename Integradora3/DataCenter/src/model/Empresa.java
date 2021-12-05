@@ -24,6 +24,6 @@ public class Empresa {
 		this.nombreEmpresa = nombreEmpresa;
 	}
 	public String toString() {
-		return "Name: "nombreEmpresa +"NIT: " + nit ;
+		return nombreEmpresa +" NIT: " + nit +".";
 	}
 }

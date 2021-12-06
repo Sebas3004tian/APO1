@@ -171,9 +171,31 @@ public class SystemDataCenter {
 			System.out.println("--------------------------------------------------------------------------");
 			System.out.println(center.capacidadTodosRACK(nombreEmpresa));
 			System.out.println("--------------------------------------------------------------------------");
-			center.cancelarAlquilerTodas(nombreEmpresa);
-			System.out.println("El alquiler de las habtiaciones a nombre de la empresa "+nombreEmpresa+" han sido canceladas con exito.");
-			out=true;
+			System.out.println("Desea continuar?: ");
+				System.out.println("(1). Si");
+				System.out.println("(2). No");
+				int respuestaContinuar=sc.nextInt();
+				if(respuestaContinuar==1 || respuestaContinuar==2){
+					if(respuestaContinuar==1){
+						if(!out){
+							center.cancelarAlquilerTodas(nombreEmpresa);
+							System.out.println("El alquiler de las habtiaciones a nombre de la empresa "+nombreEmpresa+" han sido canceladas con exito.");
+							out=true;
+						}
+					}else if(respuestaContinuar==2){
+						System.out.println(" ");
+						System.out.println("En otra ocacion sera, gracias....");
+						System.out.println(" ");
+						out=true;
+						
+					}
+				}else{
+					System.out.println(" ");
+					System.out.println("Por favor escoge 1 o 2");
+					System.out.println(" ");
+					out=true;
+				}
+			
 			
 		}while(!out);
 	}
@@ -190,9 +212,31 @@ public class SystemDataCenter {
 				System.out.println("--------------------------------------------------------------------------");
 				System.out.println(center.capacidadRACK(numeroCuarto));
 				System.out.println("--------------------------------------------------------------------------");
-				center.cancelarAlquiler(numeroCuarto);
-				System.out.println("El alquiler de la habtiacion numero "+numeroCuarto+" ha sido cancelado con exito.");
-				out=true;
+				System.out.println("Desea continuar?: ");
+				System.out.println("(1). Si");
+				System.out.println("(2). No");
+				int respuestaContinuar=sc.nextInt();
+				if(respuestaContinuar==1 || respuestaContinuar==2){
+					if(respuestaContinuar==1){
+						if(!out){
+							center.cancelarAlquiler(numeroCuarto);
+							System.out.println("El alquiler de la habtiacion numero "+numeroCuarto+" ha sido cancelado con exito.");
+							out=true;
+						}
+					}else if(respuestaContinuar==2){
+						System.out.println(" ");
+						System.out.println("En otra ocacion sera, gracias....");
+						System.out.println(" ");
+						out=true;
+						
+					}
+				}else{
+					System.out.println(" ");
+					System.out.println("Por favor escoge 1 o 2");
+					System.out.println(" ");
+					out=true;
+				}
+				
 			}else if (!center.miniRoomAlquilada(numeroCuarto)){
 				System.out.println("La habitacion no ha sido encontrada, o  no esta en estado ALQUILADO,por favor verifica el mapa de estados de las habitaciones.");
 				out=true;
@@ -307,12 +351,36 @@ public class SystemDataCenter {
 										
 
 									}
-									center.alquilarRoom(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,numRegistroProyecto,asignadoMiniRoom);
-									anadirServidor(numeroCuarto,numeroServidores);
-									System.out.println(" ");
-									System.out.println("Alquiler realizado con exito... ");
-									System.out.println(" ");
-									out=true;
+									
+									System.out.println("El valor total de la habitacion es de: "+center.calcularValorHabitacion(numeroCuarto,numeroServidores)+" pesos");
+									System.out.println("Desea continuar?: ");
+									System.out.println("(1). Si");
+									System.out.println("(2). No");
+									int respuestaContinuar=sc.nextInt();
+									if(respuestaContinuar==1 || respuestaContinuar==2){
+										if(respuestaContinuar==1){
+											if(!out){
+												center.alquilarRoom(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,numRegistroProyecto,asignadoMiniRoom);
+												anadirServidor(numeroCuarto,numeroServidores);
+												System.out.println(" ");
+												System.out.println("Alquiler realizado con exito... ");
+												System.out.println(" ");
+												out=true;
+											}
+										}else if(respuestaContinuar==2){
+											System.out.println(" ");
+											System.out.println("En otra ocacion sera, gracias....");
+											System.out.println(" ");
+											out=true;
+											
+										}
+									}else{
+										System.out.println(" ");
+										System.out.println("Por favor escoge 1 o 2");
+										System.out.println(" ");
+										out=true;
+									}
+									
 								}else {
 									System.out.println(" ");
 									System.out.println("Por favor escoge 1 o 2");

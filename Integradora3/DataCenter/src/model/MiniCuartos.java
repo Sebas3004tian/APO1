@@ -60,14 +60,14 @@ public class MiniCuartos {
 	public double capacidadServidoresDisco(){
 		double capServidoresDisco=0;
 		for (int i = 0; i < rack.size(); i++) {
-			capServidoresDisco=+(rack.get(i).getCapaDiscos()*rack.get(i).getCantDiscos());
+			capServidoresDisco+=(rack.get(i).getCapaDiscos()*rack.get(i).getCantDiscos());
 		}
 		return capServidoresDisco;
 	}
 	public double capacidadServidoresRAM(){
 		double capServidoresRAM=0;
 		for (int i = 0; i < rack.size(); i++) {
-			capServidoresRAM=+rack.get(i).getCantMemoriaRAM();
+			capServidoresRAM+=rack.get(i).getCantMemoriaRAM();
 		}
 		return capServidoresRAM;
 	}
@@ -76,9 +76,13 @@ public class MiniCuartos {
 		String capacidadTotal="";
 		double capacidadTotalDisco=0;
 		double totalMemoriaRAM=0;
+		/*for (int i = 0; i < rack.size(); i++) {
+			System.out.println(rack.get(i).toString());
+			
+		}*/
 		for (int i = 0; i < rack.size(); i++) {
-			capacidadTotalDisco=+(rack.get(i).getCapaDiscos()*rack.get(i).getCantDiscos());
-			totalMemoriaRAM=+rack.get(i).getCantMemoriaRAM();
+			capacidadTotalDisco+=(rack.get(i).getCapaDiscos()*rack.get(i).getCantDiscos());
+			totalMemoriaRAM+=rack.get(i).getCantMemoriaRAM();
 		}
 		capacidadTotal="La capadidad total de disco es de "+capacidadTotalDisco+" teras."+"\n"+"El total de memoria RAM es de "+totalMemoriaRAM+" GB";
 		return capacidadTotal;

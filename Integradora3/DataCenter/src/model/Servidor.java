@@ -66,5 +66,16 @@ public class Servidor {
 	public void setProcesador(Marca procesador) {
 		this.procesador = procesador;
 	}
+	public String toString(){
+		return  "\n"+"**** Servidor data****"+
+		"\n"+"--------------------------------------------------------------"+
+		"\n"+"getCantMemoriaCache"+getCantMemoriaCache()+
+		"\n"+"getNumProcesadores"+getNumProcesadores()+
+		"\n"+"getCantMemoriaRAM"+getCantMemoriaRAM()+
+		"\n"+"getCantDiscos"+getCantDiscos()+
+		"\n"+"getCapaDiscos"+getCapaDiscos()+
+		"\n"+"getProcesador"+getProcesador()
+		+"--------------------------------------------------------------"+"\n";
+	}
 	
 }

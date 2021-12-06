@@ -134,6 +134,31 @@ public class DataCenter {
 		}
 		return print;
 	}
+	public double calcularValorHabitacion(String numeroCuarto,int numeroServidores){
+		boolean ventanaSIoNO=false;
+		
+		String fila=numeroCuarto.substring(0,1);
+		String columna=numeroCuarto.substring(1,3);
+		
+		int intFila=Integer.parseInt(fila);
+		int intColumna=Integer.parseInt(columna);
+		
+		int i=intFila-1;
+		int j=intColumna-1;
+		
+		if(i==0 || i==7){
+			ventanaSIoNO=true;
+		}else if(j==0 || j==49){
+			ventanaSIoNO=true;
+		}
+		double valorAlquiler=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
+		if(numeroServidores<4){
+			valorAlquiler=valorAlquiler+(valorAlquiler*0.15);			
+		}
+		return valorAlquiler;
+		
+		
+	}
 	public double calcularDescuentos(int i,double valorAlquilerGeneral,boolean ventanaSIoNO){
 		double valorAlquiler=valorAlquilerGeneral;
 		

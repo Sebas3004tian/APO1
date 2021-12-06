@@ -2,16 +2,27 @@ package ui;
 import java.util.Scanner;
 import model.DataCenter;
 
+/**
+* It is the main class of the application 
+*/
+
 public class SystemDataCenter {
 	private DataCenter center;
 	private Scanner sc;
 	
 	private double rentalValue=0;
-	
+	/**
+    * The method is used to define the scanner 
+
+    */
 	public SystemDataCenter() {
 		sc= new Scanner(System.in);
 		
 	}
+	/**
+    *In this method a menu object is created and the initial menu method is called 
+	* @param args String
+    */
 	public static void main(String[] args) {
 		SystemDataCenter menu = new SystemDataCenter();
 		menu.homeDataCenter();
@@ -29,6 +40,9 @@ public class SystemDataCenter {
 		}while (answerInitialMenu !=0);
 		
 	}
+	/**
+    *this method is the main menu
+    */
 	public void homeDataCenter() {
 		try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -53,6 +67,10 @@ public class SystemDataCenter {
 		}while(!out);
 		
 	}
+	/**
+    *this method is the main menu
+	* @return answer int
+    */
 	public int initialMenu(){
 		System.out.println(" ");
 		System.out.println(" ");
@@ -69,6 +87,10 @@ public class SystemDataCenter {
 
 		return answer;
 	}
+	/**
+    *this method is to answer the main
+	* @param answerInitialMenu int
+    */
 	public void initialMenuOption(int answerInitialMenu) {
 		if(answerInitialMenu!=0&&answerInitialMenu!=1&&answerInitialMenu!=2&&answerInitialMenu!=3&&answerInitialMenu!=4){
 			System.out.println(" ");
@@ -109,6 +131,9 @@ public class SystemDataCenter {
 		}
 		
 	}
+	/**
+    *this method takes care of the map
+    */
 	public void map(){
 		System.out.println(" ");
 		System.out.println(center.showMapa());
@@ -116,6 +141,10 @@ public class SystemDataCenter {
 		System.out.println("Rooms that appear in WHITE are on, others are off.");
 		System.out.println(" ");
 	}
+	/**
+    *this method is the rent menu
+	* @return answer int
+    */
 	public int menuRent(){
 		System.out.println(" ");
 		System.out.println(" ");
@@ -131,7 +160,10 @@ public class SystemDataCenter {
 
 		return answer;
 	}
-	
+	/**
+    *this method is to answer the rent menu
+	@param answerMenuRent int
+    */
 	public void optionMenuRent(int answerMenuRent) {
 		if(answerMenuRent!=0&&answerMenuRent!=1&&answerMenuRent!=2&&answerMenuRent!=3){
 			System.out.println(" ");
@@ -161,6 +193,9 @@ public class SystemDataCenter {
 		}
 		
 	}
+	/**
+    *this method is to cancel all the mini rooms of a company
+    */
 	public void cancelAllMiniRoom(){
 		boolean out=false;
 		do{
@@ -199,6 +234,9 @@ public class SystemDataCenter {
 			
 		}while(!out);
 	}
+	/**
+    *this method is to cancel one mini room
+    */
 	public void cancelMiniRoom(){
 		boolean out=false;
 		do{
@@ -243,6 +281,9 @@ public class SystemDataCenter {
 			}
 		}while(!out);
 	}
+	/**
+    *this method takes care of renting a mini room
+    */
 	public void rentMiniRoom(){
 		boolean out=false;
 		int day=0;
@@ -392,10 +433,15 @@ public class SystemDataCenter {
 			
 		}while(!out);
 	}
+	/**
+    *this method is responsible for adding servers to a mini room
+	* @param roomNumber String
+	* @param numberServers int
+    */
 	public void addServer(String roomNumber,int numberServers){
 		boolean out=false;
 		double amountCacheMemory=0;
-		int getNumProcessors=0;
+		int numberProcessors=0;
 		int brandProcessor=0;
 		double amountRAMmemory=0;
 		int discQuantity=0;
@@ -405,7 +451,7 @@ public class SystemDataCenter {
 		System.out.println(" ");
 		for(int x=0;x<numberServers;x++){
 			amountCacheMemory=0;
-			getNumProcessors=0;
+			numberProcessors=0;
 			brandProcessor=0;
 			amountRAMmemory=0;
 			discQuantity=0;
@@ -423,8 +469,8 @@ public class SystemDataCenter {
 			out=false;
 			do{
 				System.out.println("Enter the number of processors: ");
-				getNumProcessors=sc.nextInt();
-				if(getNumProcessors<0){
+				numberProcessors=sc.nextInt();
+				if(numberProcessors<0){
 					System.out.println("The number of processors cannot be negative. ");
 				}else{
 					out=true;
@@ -472,11 +518,15 @@ public class SystemDataCenter {
 					out=true;
 				}
 			}while(!out);
-			center.addServer(roomNumber,x,amountCacheMemory,getNumProcessors,brandProcessor,amountRAMmemory,discQuantity,disksCapacity);
+			center.addServer(roomNumber,x,amountCacheMemory,numberProcessors,brandProcessor,amountRAMmemory,discQuantity,disksCapacity);
 			out=false;
 				
 		}
 	}
+	/**
+    *this method is the simulation menu
+	* @return answer int
+    */
 	public int menuSimulation(){
 		System.out.println(" ");
 		System.out.println(" ");
@@ -490,7 +540,10 @@ public class SystemDataCenter {
 
 		return answer;
 	}
-	
+	/**
+    *this method is to respond to the simulation menu
+	* @param answerMenuSimulation int
+    */
 	public void optionMenuSimulation(int answerMenuSimulation) {
 		if(answerMenuSimulation!=0&&answerMenuSimulation!=1&&answerMenuSimulation!=2){
 			System.out.println(" ");
@@ -523,6 +576,9 @@ public class SystemDataCenter {
 		}
 		
 	}
+	/**
+    *this method is to turn on all simulated locations
+    */
 	public void simulateOnAll(){
 		
 		if(center.simulateAllOn()){
@@ -533,6 +589,10 @@ public class SystemDataCenter {
 		}
 		
 	}
+	/**
+    *this method is the menu for the shutdowns of the simulated rooms
+	* @return answer int
+    */
 	public int menuSimulationOff(){
 		System.out.println(" ");
 		System.out.println(" ");
@@ -549,7 +609,10 @@ public class SystemDataCenter {
 
 		return answer;
 	}
-	
+	/**
+    *This method is to respond to the menu of the simulated rooms shutdowns
+	* @param answerMenuSimulation int
+    */
 	public void optionMenuSimulationOff(int answerMenuSimulation) {
 		if(answerMenuSimulation!=0&&answerMenuSimulation!=1&&answerMenuSimulation!=2&&answerMenuSimulation!=3&&answerMenuSimulation!=4&&answerMenuSimulation!=5&&answerMenuSimulation!=6){
 			System.out.println(" ");
@@ -588,18 +651,33 @@ public class SystemDataCenter {
 		}
 		
 	}
+	/**
+    *this method is turned off in an L shape
+    */
 	public void offL(){
 		center.simulateOffL();
 	}
+	/**
+    *this method is turned off in an Z shape
+    */
 	public void offZ(){
 		center.simulateOffZ();
 	}
+	/**
+    *this method is turned off in an H shape
+    */
 	public void offH(){
 		center.simulateOffH();
 	}
+	/**
+    *this method is turned off in an O shape
+    */
 	public void offO(){
 		center.simulateOffO();
 	}
+	/**
+    *this method is turned off in an M shape
+    */
 	public void offM(){
 		boolean out=false;
 		do{
@@ -617,6 +695,9 @@ public class SystemDataCenter {
 			}
 		}while(!out);
 	}
+	/**
+    *this method is turned off in an P shape
+    */
 	public void offP(){
 		boolean out=false;
 		do{
@@ -635,6 +716,9 @@ public class SystemDataCenter {
 		}while(!out);
 		
 	}
+	/**
+    *this method is shows all simulated locations
+    */
 	public void simulationMap(){
 		System.out.println(" ");
 		System.out.println(center.showMapSimulation());

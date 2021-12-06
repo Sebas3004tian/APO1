@@ -1,11 +1,8 @@
 package model;
-
+/**
+* this is the application controller DataCenter class
+*/
 public class DataCenter {
-	
-	
-	
-
-	
 	
 	private double generalRentValue;
 	
@@ -24,7 +21,11 @@ public class DataCenter {
 	public static final String ANSI_WHITE = "\u001B[37m";
 	public static final String ANSI_RESET = "\u001B[0m";
 	
-	
+	/**
+    * this method is the constructor of the class
+    
+    * @param generalRentValue double
+    */
 	public DataCenter(double generalRentValue) {
 		this.generalRentValue = generalRentValue;
 		
@@ -61,6 +62,10 @@ public class DataCenter {
 		}
 		
 	}
+	/**
+    * This method takes care of creating a string from the array
+    * @return print String,chain, quarter map
+    */
 	public String showMapa(){
 		
 		Status statusRoomOn=Status.ON;
@@ -86,6 +91,12 @@ public class DataCenter {
 		print +="-----------------------------------------------------------------------------------------------------------------"+"\n";
 		return print;
 	}
+	/**
+    * this method receives the position of the room and converts it to String
+	* @param j int
+	* @param i int
+    * @return print String
+    */
 	public String changeStringNumber(int j,int i){
 		j=j+1;
 		i=i+1;
@@ -99,6 +110,11 @@ public class DataCenter {
 		return number;
 
 	}
+	/**
+    * This method displays the list of available rooms
+	* @param rentalValue double
+    * @return print String
+    */
 	public String showListRooms(double rentalValue){
 		//rooms[j][i] = new MiniRooms(number);
 		String print ="";
@@ -131,6 +147,12 @@ public class DataCenter {
 		}
 		return print;
 	}
+	/**
+    * This method calculates the rental value of a room without taking into account the surcharge for servers
+	* @param roomNumber String
+	* @param numberServers int
+    * @return rentalValue double
+    */
 	public double calculateRoomValue(String roomNumber,int numberServers){
 		boolean windowYESorNO=false;
 		
@@ -156,6 +178,13 @@ public class DataCenter {
 		
 		
 	}
+	/**
+    * This method calculates discounts on the value of the room
+	* @param i int
+	* @param generalRentValue double
+	* @param windowYESorNO boolean
+    * @return rentalValue double
+    */
 	public double calculateDiscounts(int i,double generalRentValue,boolean windowYESorNO){
 		double rentalValue=generalRentValue;
 		if(windowYESorNO==true){
@@ -170,6 +199,11 @@ public class DataCenter {
 
 		return rentalValue;
 	}
+	/**
+    * This method checks if the room is available
+	* @param roomNumber String
+    * @return miniRoomFound boolean,true is available
+    */
 	public boolean miniRoomAvailable(String roomNumber){
 		boolean miniRoomFound=false;
 		
@@ -190,6 +224,11 @@ public class DataCenter {
 		return miniRoomFound;
 		
 	}
+	/**
+    * This method calculates the capacity of the Rack
+	* @param roomNumber String
+    * @return capacityTotalRack String
+    */
 	public String capacityRACK(String roomNumber){
 		String capacityTotalRack="";
 		
@@ -207,6 +246,11 @@ public class DataCenter {
 		return capacityTotalRack;
 		
 	}
+	/**
+    * This method calculates the capacity of all Racks
+	* @param roomNumber String
+    * @return capacityTotalAllRack String
+    */
 	public String capacityAllRACK(String companyName){
 		String capacityTotalAllRack="";
 		double totalRam=0;
@@ -228,6 +272,10 @@ public class DataCenter {
 		return capacityTotalAllRack;
 		
 	}
+	/**
+    * This method cancels the rent of all the rooms on behalf of a company
+	* @param companyName String
+    */
 	public void cancelRentAll(String companyName){
 		boolean windowYESorNO=false;
 		String number="";
@@ -259,7 +307,10 @@ public class DataCenter {
 			
 		}
 	}
-
+	/**
+    * This method cancels the rent of a single room given the number of this
+	* @param roomNumber String
+    */
 	public void cancelRental(String roomNumber){
 		String row=roomNumber.substring(0,1);
 		String column=roomNumber.substring(1,3);
@@ -285,6 +336,11 @@ public class DataCenter {
 		rooms[j][i].setRentalStatus(StatusRent.AVAILABLE);
 		rooms[j][i].setStatus(Status.OFF);
 	}
+	/**
+    * This method checks if a miniroom is rented
+	* @param roomNumber String
+    * @return miniRoomFound boolean
+    */
 	public boolean miniRoomRented(String roomNumber){
 		boolean miniRoomFound=false;
 		
@@ -309,6 +365,19 @@ public class DataCenter {
 		return miniRoomFound;
 		
 	}
+	/**
+    * This method rents a room
+	
+	* @param roomNumber String
+	* @param day int
+	* @param month int
+	* @param year int
+	* @param numberServers int
+	* @param nit String
+	* @param companyName String
+    * @return numProjectRegistration int
+	* @return assignedMiniRoom int
+    */
 	public void rentRoom(String roomNumber,int day,int month,int year,int numberServers,String nit,String companyName,int numProjectRegistration,int assignedMiniRoom){
 		boolean windowYESorNO=false;
 		String row=roomNumber.substring(0,1);
@@ -341,7 +410,17 @@ public class DataCenter {
 		
 		
 	}
-	public void addServer(String roomNumber,int x,double amountCacheMemory,int getNumProcessors,int brandProcessor,double amountRAMmemory,int discQuantity,double disksCapacity){
+	/**
+    * This method adds a server to a room
+	* @param roomNumber String
+	* @param x int
+	* @param amountCacheMemory double
+	* @param numberProcessors int
+	* @param amountRAMmemory double
+	* @param discQuantity int
+	* @param disksCapacity double
+    */
+	public void addServer(String roomNumber,int x,double amountCacheMemory,int numberProcessors,int brandProcessor,double amountRAMmemory,int discQuantity,double disksCapacity){
 		String row=roomNumber.substring(0,1);
 		String column=roomNumber.substring(1,3);
 		
@@ -349,8 +428,12 @@ public class DataCenter {
 		int intColumn=Integer.parseInt(column);
 		int i=intRow-1;
 		int j=intColumn-1;
-		rooms[j][i].addServidor(x,amountCacheMemory,getNumProcessors,brandProcessor,amountRAMmemory,discQuantity,disksCapacity);
+		rooms[j][i].addServidor(x,amountCacheMemory,numberProcessors,brandProcessor,amountRAMmemory,discQuantity,disksCapacity);
 	}
+	/**
+    * This method turns on all simulation rooms
+	* @return turnOnSuccessful boolean
+    */
 	public boolean simulateAllOn(){
 		boolean turnOnSuccessful=false;
 		int count=0;
@@ -366,6 +449,9 @@ public class DataCenter {
 		return turnOnSuccessful;
 		
 	}
+	/**
+    * This method turns off in L shape
+    */
 	public void simulateOffL(){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
@@ -375,6 +461,9 @@ public class DataCenter {
 			}
 		}
 	}
+	/**
+    * This method turns off in Z shape
+    */
 	public void simulateOffZ(){
 		int diagonal=48;
 		for (int i=0; i< 8; i++ ) { 
@@ -389,6 +478,10 @@ public class DataCenter {
 			diagonal=diagonal-8;
 		}
 	}
+	/**
+    * This method turns off in H shape
+	
+    */
 	public void simulateOffH(){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
@@ -398,6 +491,9 @@ public class DataCenter {
 			}
 		}
 	}
+	/**
+    * This method turns off in O shape
+    */
 	public void simulateOffO(){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
@@ -408,6 +504,10 @@ public class DataCenter {
 		}
 		
 	}
+	/**
+    * This method turns off in M shape
+	* @param columnTurnOff int
+    */
 	public void simulateOffM(int columnTurnOff){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
@@ -417,6 +517,10 @@ public class DataCenter {
 			}
 		}
 	}
+	/**
+    * This method turns off in P shape
+	* @param corridorTurnOff int
+    */
 	public void simulateOffP(int corridorTurnOff){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 

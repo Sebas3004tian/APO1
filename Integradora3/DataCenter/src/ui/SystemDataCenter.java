@@ -97,7 +97,7 @@ public class SystemDataCenter {
 			}while(respuestaMenuAlquiler!=0);
 			break;
 		case 3: 
-			
+			mapa();
 			break;
 		case 4: 
 			int respuestaMenuSimulacion=0;
@@ -108,6 +108,13 @@ public class SystemDataCenter {
 			break;
 		}
 		
+	}
+	public void mapa(){
+		System.out.println(" ");
+		System.out.println(center.showMapa());
+		System.out.println(" ");
+		System.out.println("Las habitaciones que aparecen en blanco se encuentran encendidas");
+		System.out.println(" ");
 	}
 	public int MenuAlquiler(){
 		System.out.println(" ");
@@ -164,7 +171,9 @@ public class SystemDataCenter {
 			System.out.println("--------------------------------------------------------------------------");
 			System.out.println(center.capacidadTodosRACK(nombreEmpresa));
 			System.out.println("--------------------------------------------------------------------------");
+			center.cancelarAlquilerTodas(nombreEmpresa);
 			System.out.println("El alquiler de las habtiaciones a nombre de la empresa "+nombreEmpresa+" han sido canceladas con exito.");
+			out=true;
 			
 		}while(!out);
 	}
@@ -183,8 +192,10 @@ public class SystemDataCenter {
 				System.out.println("--------------------------------------------------------------------------");
 				center.cancelarAlquiler(numeroCuarto);
 				System.out.println("El alquiler de la habtiacion numero "+numeroCuarto+" ha sido cancelado con exito.");
+				out=true;
 			}else if (!center.miniRoomAlquilada(numeroCuarto)){
 				System.out.println("La habitacion no ha sido encontrada, o  no esta en estado ALQUILADO,por favor verifica el mapa de estados de las habitaciones.");
+				out=true;
 			}
 		}while(!out);
 	}
@@ -298,6 +309,9 @@ public class SystemDataCenter {
 									}
 									center.alquilarRoom(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,numRegistroProyecto,asignadoMiniRoom);
 									anadirServidor(numeroCuarto,numeroServidores);
+									System.out.println(" ");
+									System.out.println("Alquiler realizado con exito... ");
+									System.out.println(" ");
 									out=true;
 								}else {
 									System.out.println(" ");
@@ -406,7 +420,7 @@ public class SystemDataCenter {
 	public int MenuSimulacion(){
 		System.out.println(" ");
 		System.out.println(" ");
-		System.out.println("Bienvenido al apartado de Alquiler.");
+		System.out.println("Bienvenido al apartado de simulacion.");
 		System.out.println("Selecciona lo que deseas hacer:");
 		System.out.println(" ");
 		System.out.println("(1). Simular el prendido de todos los minicuartos.");
@@ -435,10 +449,138 @@ public class SystemDataCenter {
 			System.out.println(" ");
 			break;
 		case 1:
+			simularPrendidoTodos();
 			break;
 		case 2:
+			int respuestaMenuSimulacionApagado=0;
+			do{
+				respuestaMenuSimulacionApagado=menuSimulacionApagado();
+				opcionMenuSimulacionApagado(respuestaMenuSimulacionApagado);
+				mapaSimulacion();
+			}while(respuestaMenuSimulacionApagado!=0);
+			
 			break;
 		}
+		
+	}
+	public void simularPrendidoTodos(){
+		
+		if(center.simularTodosPrendido()){
+			
+			System.out.println(" ");
+			System.out.println("Todas las habitaciones han sido prendidas exitosamente");
+			System.out.println(" ");
+		}
+		
+	}
+	public int menuSimulacionApagado(){
+		System.out.println(" ");
+		System.out.println(" ");
+		System.out.println("Selecciona lo que deseas hacer:");
+		System.out.println(" ");
+		System.out.println("(1). Apagado en forma de L");
+		System.out.println("(2). Apagado en forma de Z");
+		System.out.println("(3). Apagado en forma de H");
+		System.out.println("(4). Apagado en forma de O");
+		System.out.println("(5). Apagado en forma de M (apaga una columna escogida)");
+		System.out.println("(6). Apagado en forma de P (apaga un corredor escogido)");
+		System.out.println("(0). Volver al menu principal");
+		int respuesta=sc.nextInt();
+
+		return respuesta;
+	}
+	
+	public void opcionMenuSimulacionApagado(int respuestaMenuSimulacion) {
+		if(respuestaMenuSimulacion!=0&&respuestaMenuSimulacion!=1&&respuestaMenuSimulacion!=2&&respuestaMenuSimulacion!=3&&respuestaMenuSimulacion!=4&&respuestaMenuSimulacion!=5&&respuestaMenuSimulacion!=6){
+			System.out.println(" ");
+			System.out.println("///////RECUERDA SELECCIONAR un numero del menu/////////");
+			System.out.println(" ");
+		}
+		try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e) {
+            
+        }
+		switch(respuestaMenuSimulacion) {
+		case 0: 
+			System.out.println(" ");	
+			System.out.println("Devuleta al menu inicial");
+			System.out.println(" ");
+			break;
+		case 1:
+			apagadoL();
+			break;
+		case 2:
+			apagadoZ();
+			break;
+		case 3:
+			apagadoH();
+			break;
+		case 4:
+			apagadoO();
+			break;
+		case 5:
+			apagadoM();
+			break;
+		case 6:
+			apagadoP();
+			break;
+		}
+		
+	}
+	public void apagadoL(){
+		center.simularApagadoL();
+	}
+	public void apagadoZ(){
+		center.simularApagadoZ();
+	}
+	public void apagadoH(){
+		center.simularApagadoH();
+	}
+	public void apagadoO(){
+		center.simularApagadoO();
+	}
+	public void apagadoM(){
+		boolean out=false;
+		do{
+			System.out.println("Digita la columna que quieres apagar (1-50)");
+			System.out.println(" ");
+			int columnaApagar=sc.nextInt();
+			
+			if(columnaApagar<1 || columnaApagar>50){
+				System.out.println("Error selecciona una columna del 1 al 50.");
+				out=true;
+			}
+			if(!out){
+				center.simularApagadoM(columnaApagar);
+				out=true;
+			}
+		}while(!out);
+	}
+	public void apagadoP(){
+		boolean out=false;
+		do{
+			System.out.println("Digita el corredor que quieres apagar (1-8)");
+			System.out.println(" ");
+			int corredorApagar=sc.nextInt();
+			
+			if(corredorApagar<1 || corredorApagar>8){
+				System.out.println("Error selecciona un corredor del 1 al 8.");
+				out=true;
+			}
+			if(!out){
+				center.simularApagadoP(corredorApagar);
+				out=true;
+			}
+		}while(!out);
+		
+	}
+	public void mapaSimulacion(){
+		System.out.println(" ");
+		System.out.println(center.showMapaSimulacion());
+		System.out.println(" ");
+		System.out.println("Las habitaciones que aparecen en blanco se encuentran encendidas");
+		System.out.println(" ");
 		
 	}
 }

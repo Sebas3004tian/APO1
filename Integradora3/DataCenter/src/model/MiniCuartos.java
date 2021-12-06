@@ -32,11 +32,13 @@ public class MiniCuartos {
 		this.ventana = ventana;
 		fechaAlquiler = new Date(day, month, year);
 		empresaAlquilo = new Empresa(nit, nombreEmpresa);
+		rack = new ArrayList <Servidor>();
 		
 	}
 	public MiniCuartos(double valorAlquiler,String numero,int day,int month,int year,int numeroServidores,int numRegistroProyecto,int fila,int columna,boolean ventana) {
 		String nombreEmpresa="ICESI";
-		String nit="890.316.745-5";
+		String nit="890.316.745-5"; 
+		this.nombreEmpresa=nombreEmpresa;		
 		this.valorAlquiler = valorAlquiler;
 		this.numero = numero;
 		this.columna = columna;
@@ -44,12 +46,21 @@ public class MiniCuartos {
 		this.ventana = ventana;
 		fechaAlquiler = new Date(day, month, year);
 		empresaAlquilo = new Empresa(nit, nombreEmpresa);
+		rack = new ArrayList <Servidor>();
+	}
+	public MiniCuartos(double valorAlquiler,String numero,int fila,int columna,boolean ventana){
+		this.valorAlquiler = valorAlquiler;
+		this.numero = numero;
+		this.columna = columna;
+		this.fila = fila;
+		this.ventana = ventana;
+		rack = new ArrayList <Servidor>();
 	}
 
 	public double capacidadServidoresDisco(){
 		double capServidoresDisco=0;
 		for (int i = 0; i < rack.size(); i++) {
-			capServidoresDisco=+rack.get(i).getCapaDiscos();
+			capServidoresDisco=+(rack.get(i).getCapaDiscos()*rack.get(i).getCantDiscos());
 		}
 		return capServidoresDisco;
 	}
@@ -66,7 +77,7 @@ public class MiniCuartos {
 		double capacidadTotalDisco=0;
 		double totalMemoriaRAM=0;
 		for (int i = 0; i < rack.size(); i++) {
-			capacidadTotalDisco=+rack.get(i).getCapaDiscos();
+			capacidadTotalDisco=+(rack.get(i).getCapaDiscos()*rack.get(i).getCantDiscos());
 			totalMemoriaRAM=+rack.get(i).getCantMemoriaRAM();
 		}
 		capacidadTotal="La capadidad total de disco es de "+capacidadTotalDisco+" teras."+"\n"+"El total de memoria RAM es de "+totalMemoriaRAM+" GB";
@@ -184,6 +195,18 @@ public class MiniCuartos {
 			ventanaMensaje=" SI ";
 		}
 		return  "\n"+"**** MiniRoom data****"+
+		"\n"+"--------------------------------------------------------------"+
+		"\n"+"El numero de la habitacion es: "+numero+" En el corredor: "+(fila+1)+" En la posicion: "+(columna+1)+
+		"\n"+"La habitacion"+ventanaMensaje+"tiene ventana cercana."+
+		"\n"+"El valor total de arriendo es de: "+valorAlquiler+" pesos."+"\n"
+		+"--------------------------------------------------------------"+"\n";
+	}
+	/*public String toString() {
+		String ventanaMensaje=" NO ";
+		if(ventana){
+			ventanaMensaje=" SI ";
+		}
+		return  "\n"+"**** MiniRoom data****"+
 		"\n"+"------------------------------"+
 		"\n"+"El numero de la habitacion es: "+numero+" En el corredor: "+fila+" En la posicion: "+columna+
 		"\n"+"La habitacion"+ventanaMensaje+"tiene ventana cercana."+
@@ -194,6 +217,6 @@ public class MiniCuartos {
 		"\n"+"El estado de la habitacion es "+estado+
 		"\n"+"El valor total de arriendo es de: "+valorAlquiler+" pesos."+"\n"
 		+"--------------------------------------------------------------"+"\n";
-	}
+	}*/
 	
 }

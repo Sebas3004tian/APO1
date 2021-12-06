@@ -6,7 +6,7 @@ public class SystemDataCenter {
 	private DataCenter center;
 	private Scanner sc;
 	
-	private double valorAlquiler=0;
+	private double rentalValue=0;
 	
 	public SystemDataCenter() {
 		sc= new Scanner(System.in);
@@ -14,9 +14,9 @@ public class SystemDataCenter {
 	}
 	public static void main(String[] args) {
 		SystemDataCenter menu = new SystemDataCenter();
-		menu.inicioDataCenter();
+		menu.homeDataCenter();
 		
-		int respuestaMenuInicial= 0;
+		int answerInitialMenu= 0;
 		
 		try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -24,12 +24,12 @@ public class SystemDataCenter {
             
         }
 		do {
-		    respuestaMenuInicial =menu.MenuInicial();
-		    menu.opcionMenuInicial(respuestaMenuInicial);
-		}while (respuestaMenuInicial !=0);
+		    answerInitialMenu =menu.initialMenu();
+		    menu.initialMenuOption(answerInitialMenu);
+		}while (answerInitialMenu !=0);
 		
 	}
-	public void inicioDataCenter() {
+	public void homeDataCenter() {
 		try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (Exception e) {
@@ -38,41 +38,41 @@ public class SystemDataCenter {
 		boolean out=false;
 		System.out.println(" ");
 		System.out.println(" ");
-		System.out.println("Bienvenido a la aplicacion de DataCenter.");
+		System.out.println("Welcome to the DataCenter application.");
 		System.out.println(" ");
-		System.out.println("Digite el valor de alquiler para todos los minicuartos: ");
+		System.out.println("Enter the rental value for all mini-rooms:");
 		do{
-			double valorAlquilerGeneral= sc.nextDouble();
-			if(valorAlquilerGeneral>0){
+			double generalRentValue= sc.nextDouble();
+			if(generalRentValue>0){
 				out=true;
-				valorAlquiler=valorAlquilerGeneral;
-				center = new DataCenter(valorAlquilerGeneral);
+				rentalValue=generalRentValue;
+				center = new DataCenter(generalRentValue);
 			}else{
-				System.out.println("Porfavor ingresa un valor valido!!");
+				System.out.println("Please enter a valid value !!");
 			}
 		}while(!out);
 		
 	}
-	public int MenuInicial(){
+	public int initialMenu(){
 		System.out.println(" ");
 		System.out.println(" ");
-		System.out.println("Bienvenido al menu del data center ");
+		System.out.println("Welcome to the data center menu");
 		System.out.println(" ");
-		System.out.println("Selecciona lo que deseas hacer:");
+		System.out.println("Select what you want to do:");
 		System.out.println(" ");
-		System.out.println("(1). Generar un listado con lo minicuartos disponibles");
-		System.out.println("(2). Apartado de Alquiler");
-		System.out.println("(3). Mapa General");
-		System.out.println("(4). Apartado de Simulaciones");
-		System.out.println("(0). Salir de la aplicacion");
-		int respuesta=sc.nextInt();
+		System.out.println("(1). Generate a list with the available mini-rooms");
+		System.out.println("(2). Rent Section");
+		System.out.println("(3). General Map");
+		System.out.println("(4). Simulations Section");
+		System.out.println("(0). Exit application");
+		int answer=sc.nextInt();
 
-		return respuesta;
+		return answer;
 	}
-	public void opcionMenuInicial(int respuestaMenuInicial) {
-		if(respuestaMenuInicial!=0&&respuestaMenuInicial!=1&&respuestaMenuInicial!=2&&respuestaMenuInicial!=3&&respuestaMenuInicial!=4){
+	public void initialMenuOption(int answerInitialMenu) {
+		if(answerInitialMenu!=0&&answerInitialMenu!=1&&answerInitialMenu!=2&&answerInitialMenu!=3&&answerInitialMenu!=4){
 			System.out.println(" ");
-			System.out.println("///////RECUERDA SELECCIONAR un numero del menu/////////");
+			System.out.println("///////REMEMBER TO SELECT a number from the menu/////////");
 			System.out.println(" ");
 		}
 		try {
@@ -80,62 +80,62 @@ public class SystemDataCenter {
         } catch (Exception e) {
             
         }
-		switch(respuestaMenuInicial) {
+		switch(answerInitialMenu) {
 		case 0: 
 			System.out.println(" ");	
-			System.out.println("Se cierra la aplicacion,gracias...");
+			System.out.println("The application is closed, thanks ...");
 			System.out.println(" ");
 			break;
 		case 1:
-			System.out.println(center.showListRooms(valorAlquiler));
+			System.out.println(center.showListRooms(rentalValue));
 			break;
 		case 2:
-			int respuestaMenuAlquiler=0;
+			int answerMenuRent=0;
 			do{
-				respuestaMenuAlquiler=MenuAlquiler();
-				opcionMenuAlquiler(respuestaMenuAlquiler);
-			}while(respuestaMenuAlquiler!=0);
+				answerMenuRent=menuRent();
+				optionMenuRent(answerMenuRent);
+			}while(answerMenuRent!=0);
 			break;
 		case 3: 
-			mapa();
+			map();
 			break;
 		case 4: 
-			int respuestaMenuSimulacion=0;
+			int answerMenuSimulation=0;
 			do{
-				respuestaMenuSimulacion=MenuSimulacion();
-				opcionMenuSimulacion(respuestaMenuSimulacion);
-			}while(respuestaMenuSimulacion!=0);
+				answerMenuSimulation=menuSimulation();
+				optionMenuSimulation(answerMenuSimulation);
+			}while(answerMenuSimulation!=0);
 			break;
 		}
 		
 	}
-	public void mapa(){
+	public void map(){
 		System.out.println(" ");
 		System.out.println(center.showMapa());
 		System.out.println(" ");
-		System.out.println("Las habitaciones que aparecen en blanco se encuentran encendidas");
+		System.out.println("Rooms that appear in WHITE are on, others are off.");
 		System.out.println(" ");
 	}
-	public int MenuAlquiler(){
+	public int menuRent(){
 		System.out.println(" ");
 		System.out.println(" ");
-		System.out.println("Bienvenido al apartado de Alquiler.");
+		System.out.println("Welcome to the Rental section.");
 		System.out.println(" ");
-		System.out.println("Selecciona lo que deseas hacer:");
+		System.out.println("Select what you want to do:");
 		System.out.println(" ");
-		System.out.println("(1). Alquilar  un minicuarto");
-		System.out.println("(2). Cancelar el alquiler para un minicuarto");
-		System.out.println("(3). Cancelar el alquiler para todos los minicuartos de una empresa");
-		System.out.println("(0). Volver al menu principal");
-		int respuesta=sc.nextInt();
+		System.out.println("(1). Rent a mini-room");
+		System.out.println("(2). Cancel the rental for a mini-room");
+		System.out.println("(3). Cancel the rent for all the mini-rooms of a company");
+		System.out.println("(0). Back to Main Menu");
+		int answer=sc.nextInt();
 
-		return respuesta;
+		return answer;
 	}
 	
-	public void opcionMenuAlquiler(int respuestaMenuAlquiler) {
-		if(respuestaMenuAlquiler!=0&&respuestaMenuAlquiler!=1&&respuestaMenuAlquiler!=2&&respuestaMenuAlquiler!=3){
+	public void optionMenuRent(int answerMenuRent) {
+		if(answerMenuRent!=0&&answerMenuRent!=1&&answerMenuRent!=2&&answerMenuRent!=3){
 			System.out.println(" ");
-			System.out.println("///////RECUERDA SELECCIONAR un numero del menu/////////");
+			System.out.println("///////REMEMBER TO SELECT a number from the menu/////////");
 			System.out.println(" ");
 		}
 		try {
@@ -143,55 +143,55 @@ public class SystemDataCenter {
         } catch (Exception e) {
             
         }
-		switch(respuestaMenuAlquiler) {
+		switch(answerMenuRent) {
 		case 0: 
 			System.out.println(" ");
-			System.out.println("Devuleta al menu inicial");
+			System.out.println("Back to the initial menu ");
 			System.out.println(" ");
 			break;
 		case 1:
-			alquilarMiniRoom();
+			rentMiniRoom();
 			break;
 		case 2:
-			cancelarMiniRoom();
+			cancelMiniRoom();
 			break;
 		case 3:
-			cancelarTodosMiniRoom();		
+			cancelAllMiniRoom();		
 			break;
 		}
 		
 	}
-	public void cancelarTodosMiniRoom(){
+	public void cancelAllMiniRoom(){
 		boolean out=false;
 		do{
-			System.out.println("Ingresa el nombre de la empresa para cancelar el alquiler de todas las habitaciones asociadas: ");
-			String nombreEmpresa= sc.next();
+			System.out.println("Enter the name of the company to cancel the rental of all associated rooms:");
+			String companyName= sc.next();
 			sc.nextLine();
-			System.out.println("Antes de proceder a la cancelacion la capacidad de procesamiento del RACK de esta habitacion es:");
+			System.out.println("Before proceeding with the cancellation, the processing capacity of the RACK of this room is:");
 			System.out.println("--------------------------------------------------------------------------");
-			System.out.println(center.capacidadTodosRACK(nombreEmpresa));
+			System.out.println(center.capacityAllRACK(companyName));
 			System.out.println("--------------------------------------------------------------------------");
-			System.out.println("Desea continuar?: ");
-				System.out.println("(1). Si");
+			System.out.println("Do you wish to continue?: ");
+				System.out.println("(1). Yes");
 				System.out.println("(2). No");
-				int respuestaContinuar=sc.nextInt();
-				if(respuestaContinuar==1 || respuestaContinuar==2){
-					if(respuestaContinuar==1){
+				int answerContinue=sc.nextInt();
+				if(answerContinue==1 || answerContinue==2){
+					if(answerContinue==1){
 						if(!out){
-							center.cancelarAlquilerTodas(nombreEmpresa);
-							System.out.println("El alquiler de las habtiaciones a nombre de la empresa "+nombreEmpresa+" han sido canceladas con exito.");
+							center.cancelRentAll(companyName);
+							System.out.println("The rent of the rooms in the name of the company "+companyName+" have been successfully canceled.");
 							out=true;
 						}
-					}else if(respuestaContinuar==2){
+					}else if(answerContinue==2){
 						System.out.println(" ");
-						System.out.println("En otra ocacion sera, gracias....");
+						System.out.println("On another occasion it will be, thank you ...");
 						System.out.println(" ");
 						out=true;
 						
 					}
 				}else{
 					System.out.println(" ");
-					System.out.println("Por favor escoge 1 o 2");
+					System.out.println("Please choose 1 or 2");
 					System.out.println(" ");
 					out=true;
 				}
@@ -199,51 +199,51 @@ public class SystemDataCenter {
 			
 		}while(!out);
 	}
-	public void cancelarMiniRoom(){
+	public void cancelMiniRoom(){
 		boolean out=false;
 		do{
-			System.out.println("Ingresa el numero del minicuarto que deseas cancelar el alquiler: ");
-			String numeroCuarto= sc.next();
+			System.out.println("Enter the number of the mini-room you want to cancel the rental: ");
+			String roomNumber= sc.next();
 			sc.nextLine();
 			
 			
-			if(center.miniRoomAlquilada(numeroCuarto)){
-				System.out.println("Antes de proceder a la cancelacion la capacidad de procesamiento del RACK de esta habitacion es:");
+			if(center.miniRoomRented(roomNumber)){
+				System.out.println("Before proceeding with the cancellation, the processing capacity of the RACK of this room is:");
 				System.out.println("--------------------------------------------------------------------------");
-				System.out.println(center.capacidadRACK(numeroCuarto));
+				System.out.println(center.capacityRACK(roomNumber));
 				System.out.println("--------------------------------------------------------------------------");
-				System.out.println("Desea continuar?: ");
-				System.out.println("(1). Si");
+				System.out.println("Do you wish to continue?: ");
+				System.out.println("(1). Yes");
 				System.out.println("(2). No");
-				int respuestaContinuar=sc.nextInt();
-				if(respuestaContinuar==1 || respuestaContinuar==2){
-					if(respuestaContinuar==1){
+				int answerContinue=sc.nextInt();
+				if(answerContinue==1 || answerContinue==2){
+					if(answerContinue==1){
 						if(!out){
-							center.cancelarAlquiler(numeroCuarto);
-							System.out.println("El alquiler de la habtiacion numero "+numeroCuarto+" ha sido cancelado con exito.");
+							center.cancelRental(roomNumber);
+							System.out.println("The rent of the room number "+roomNumber+" has been successfully canceled.");
 							out=true;
 						}
-					}else if(respuestaContinuar==2){
+					}else if(answerContinue==2){
 						System.out.println(" ");
-						System.out.println("En otra ocacion sera, gracias....");
+						System.out.println("On another occasion it will be, thank you ...");
 						System.out.println(" ");
 						out=true;
 						
 					}
 				}else{
 					System.out.println(" ");
-					System.out.println("Por favor escoge 1 o 2");
+					System.out.println("Please choose 1 or 2");
 					System.out.println(" ");
 					out=true;
 				}
 				
-			}else if (!center.miniRoomAlquilada(numeroCuarto)){
-				System.out.println("La habitacion no ha sido encontrada, o  no esta en estado ALQUILADO,por favor verifica el mapa de estados de las habitaciones.");
+			}else if (!center.miniRoomRented(roomNumber)){
+				System.out.println("The room has not been found, or it is not in RENTED status, please check the status map of the rooms.");
 				out=true;
 			}
 		}while(!out);
 	}
-	public void alquilarMiniRoom(){
+	public void rentMiniRoom(){
 		boolean out=false;
 		int day=0;
 		int month=0;
@@ -251,17 +251,17 @@ public class SystemDataCenter {
 		
 		System.out.println(" ");
 		System.out.println(" ");
-		System.out.println("Bienvenido al apartado de alquilar un minicuarto");
+		System.out.println("Welcome to the section of renting a mini-room");
 		System.out.println(" ");
 		do{
-			System.out.println("Ingresa el numero del minicuarto que deseas alquilar: ");
-			String numeroCuarto= sc.next();
+			System.out.println("Enter the number of the mini-room you want to rent: ");
+			String roomNumber= sc.next();
 			sc.nextLine();
 			
 			
-			if(center.miniRoomDisponible(numeroCuarto)){
+			if(center.miniRoomAvailable(roomNumber)){
 	
-				System.out.println("Ingresa la fecha de hoy: ");
+				System.out.println("Enter today's date: ");
 				System.out.println("Day : ");
 				day=sc.nextInt();
 				
@@ -317,73 +317,65 @@ public class SystemDataCenter {
 							
 						}
 						if(!out){
-							System.out.println("Ingresa el numero de rack que habra en el RACK:  ");
-							int numeroServidores=sc.nextInt();
-							if(numeroServidores<0){
-								System.out.println("Error... selecciona un numero mayor a o igual a 0");
+							System.out.println("Enter the rack number that will be in the RACK: ");
+							int numberServers=sc.nextInt();
+							if(numberServers<0){
+								System.out.println("Error ... select a number greater than or equal to 0");
 								out=true;
 							}
 							if(!out){
-								System.out.println("Ingresa a quien estara asignado el minicuarto:  ");
-								System.out.println("1.Proyecto de Investigacion");
-								System.out.println("2.Empresa");
-								int asignadoMiniRoom=sc.nextInt();
-								if(asignadoMiniRoom==1 || asignadoMiniRoom==2){
-									int numRegistroProyecto=0;
+								System.out.println("Enter who will be assigned the mini-room:  ");
+								System.out.println("1.Investigation project");
+								System.out.println("2.Company");
+								int assignedMiniRoom=sc.nextInt();
+								if(assignedMiniRoom==1 || assignedMiniRoom==2){
+									int numProjectRegistration=0;
 									String nit="";
-									String nombreEmpresa="";
-									if(asignadoMiniRoom==1){
-										System.out.println("Ingresa el numero de registro del proyecto: ");
-										numRegistroProyecto=sc.nextInt();
-										
-										//center.alquilarRoomProyecto(numeroCuarto,day,month,year,numeroServidores,numRegistroProyecto);
-										
-										
+									String companyName="";
+									if(assignedMiniRoom==1){
+										System.out.println("Enter the project registration number: ");
+										numProjectRegistration=sc.nextInt();
 									}
-									if(asignadoMiniRoom==2){
-										System.out.println("Ingresa el nit de la empresa: ");
+									if(assignedMiniRoom==2){
+										System.out.println("Enter the nit of the company: ");
 										nit= sc.next();
 										sc.nextLine();
-										System.out.println("Ingresa el nombre de la empresa: ");
-										nombreEmpresa= sc.next();
-										
-										//center.alquilarRoomEmpresa(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa);
-										
-
+										System.out.println("Enter the name of the company: ");
+										companyName= sc.next();
 									}
 									
-									System.out.println("El valor total de la habitacion es de: "+center.calcularValorHabitacion(numeroCuarto,numeroServidores)+" pesos");
-									System.out.println("Desea continuar?: ");
-									System.out.println("(1). Si");
+									System.out.println("The total value of the room is: "+center.calculateRoomValue(roomNumber,numberServers)+" pesos");
+									System.out.println("Do you wish to continue?: ");
+									System.out.println("(1). Yes");
 									System.out.println("(2). No");
-									int respuestaContinuar=sc.nextInt();
-									if(respuestaContinuar==1 || respuestaContinuar==2){
-										if(respuestaContinuar==1){
+									int answerContinue=sc.nextInt();
+									if(answerContinue==1 || answerContinue==2){
+										if(answerContinue==1){
 											if(!out){
-												center.alquilarRoom(numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,numRegistroProyecto,asignadoMiniRoom);
-												anadirServidor(numeroCuarto,numeroServidores);
+												center.rentRoom(roomNumber,day,month,year,numberServers,nit,companyName,numProjectRegistration,assignedMiniRoom);
+												addServer(roomNumber,numberServers);
 												System.out.println(" ");
-												System.out.println("Alquiler realizado con exito... ");
+												System.out.println("Rental made successfully ...");
 												System.out.println(" ");
 												out=true;
 											}
-										}else if(respuestaContinuar==2){
+										}else if(answerContinue==2){
 											System.out.println(" ");
-											System.out.println("En otra ocacion sera, gracias....");
+											System.out.println("On another occasion it will be, thank you ...");
 											System.out.println(" ");
 											out=true;
 											
 										}
 									}else{
 										System.out.println(" ");
-										System.out.println("Por favor escoge 1 o 2");
+										System.out.println("Please choose 1 or 2");
 										System.out.println(" ");
 										out=true;
 									}
 									
 								}else {
 									System.out.println(" ");
-									System.out.println("Por favor escoge 1 o 2");
+									System.out.println("Please choose 1 or 2");
 									System.out.println(" ");
 									out=true;
 								}
@@ -391,118 +383,118 @@ public class SystemDataCenter {
 						}
 					}
 				}
-			}else if(!center.miniRoomDisponible(numeroCuarto)){
+			}else if(!center.miniRoomAvailable(roomNumber)){
 				System.out.println(" ");
-				System.out.println("El cuarto ingresado se encuentra ocupado o no existe,intenta con otro numero(tambien puedes revisar el mapa,para saber los numeros de cuartos disponibles)");
+				System.out.println("The room entered is occupied or does not exist, try another number (you can also check the map, to know the numbers of rooms available)");
 				System.out.println(" ");
 				out=true;
 			}
 			
 		}while(!out);
 	}
-	public void anadirServidor(String numeroCuarto,int numeroServidores){
+	public void addServer(String roomNumber,int numberServers){
 		boolean out=false;
-		double cantMemoriaCache=0;
-		int numProcesadores=0;
-		int marcaProcesador=0;
-		double cantMemoriaRAM=0;
-		int cantDiscos=0;
-		double capaDiscos=0;
+		double amountCacheMemory=0;
+		int getNumProcessors=0;
+		int brandProcessor=0;
+		double amountRAMmemory=0;
+		int discQuantity=0;
+		double disksCapacity=0;
 		System.out.println(" ");
-		System.out.println("A continuacion ingresa la informacion de cada servidor en el RACK");
+		System.out.println("Then enter the information of each server in the RACK ");
 		System.out.println(" ");
-		for(int x=0;x<numeroServidores;x++){
-			cantMemoriaCache=0;
-			numProcesadores=0;
-			marcaProcesador=0;
-			cantMemoriaRAM=0;
-			cantDiscos=0;
-			capaDiscos=0;
-			System.out.println("Servidor "+(x+1)+" --------------------------------------------------------");
+		for(int x=0;x<numberServers;x++){
+			amountCacheMemory=0;
+			getNumProcessors=0;
+			brandProcessor=0;
+			amountRAMmemory=0;
+			discQuantity=0;
+			disksCapacity=0;
+			System.out.println("Server "+(x+1)+" --------------------------------------------------------");
 			do{
-				System.out.println("Ingresa la cantidad de memoria cache en GB:");
-				cantMemoriaCache=sc.nextDouble();
-				if(cantMemoriaCache<0){
-					System.out.println("La memoria cache no puede ser negativa.");
+				System.out.println("Enter the amount of cache memory in GB: ");
+				amountCacheMemory=sc.nextDouble();
+				if(amountCacheMemory<0){
+					System.out.println("Cache memory cannot be negative. ");
 				}else{
 					out=true;
 				}
 			}while(!out);
 			out=false;
 			do{
-				System.out.println("Ingresa el numero de procesadores:");
-				numProcesadores=sc.nextInt();
-				if(numProcesadores<0){
-					System.out.println("El numero de procesadores no puede ser negativo.");
+				System.out.println("Enter the number of processors: ");
+				getNumProcessors=sc.nextInt();
+				if(getNumProcessors<0){
+					System.out.println("The number of processors cannot be negative. ");
 				}else{
 					out=true;
 				}
 			}while(!out);
 			out=false;
 			do{
-				System.out.println("Ingresa la marca del procesador: ");
+				System.out.println("Enter the processor brand: ");
 				System.out.println("1.INTEL");
 				System.out.println("2.AMD");
-				marcaProcesador=sc.nextInt();
-				if(marcaProcesador!=1 && marcaProcesador!=2){
-					System.out.println("Solo puedes seleccionar INTEL o AMD");
+				brandProcessor=sc.nextInt();
+				if(brandProcessor!=1 && brandProcessor!=2){
+					System.out.println("You can only select INTEL or AMD ");
 				}else{
 					out=true;
 				}
 			}while(!out);
 			out=false;
 			do{
-				System.out.println("Ingresa la cantidad de memoria RAM en GB:");
-				cantMemoriaRAM=sc.nextDouble();
-				if(cantMemoriaRAM<0){
-					System.out.println("La memoria RAM no puede ser negativa.");
+				System.out.println("Enter the amount of RAM in GB: " );
+				amountRAMmemory=sc.nextDouble();
+				if(amountRAMmemory<0){
+					System.out.println("RAM cannot be negative. ");
 				}else{
 					out=true;
 				}
 			}while(!out);
 			out=false;
 			do{
-				System.out.println("Ingresa la cantidad de discos:");
-				cantDiscos=sc.nextInt();
-				if(cantDiscos<0){
-					System.out.println("El numero de discos no puede ser negativo.");
+				System.out.println("Enter the number of disks: ");
+				discQuantity=sc.nextInt();
+				if(discQuantity<0){
+					System.out.println("The number of discs cannot be negative. ");
 				}else{
 					out=true;
 				}
 			}while(!out);
 			out=false;
 			do{
-				System.out.println("Ingresa la capacidad de los discos en teras:");
-				capaDiscos=sc.nextDouble();
-				if(capaDiscos<0){
-					System.out.println("La capacidad de los discos no puede ser negativa.");
+				System.out.println("Enter the capacity of the disks in teras: ");
+				disksCapacity=sc.nextDouble();
+				if(disksCapacity<0){
+					System.out.println("The capacity of the discs cannot be negative. ");
 				}else{
 					out=true;
 				}
 			}while(!out);
-			center.anadirServidor(numeroCuarto,x,cantMemoriaCache,numProcesadores,marcaProcesador,cantMemoriaRAM,cantDiscos,capaDiscos);
+			center.addServer(roomNumber,x,amountCacheMemory,getNumProcessors,brandProcessor,amountRAMmemory,discQuantity,disksCapacity);
 			out=false;
 				
 		}
 	}
-	public int MenuSimulacion(){
+	public int menuSimulation(){
 		System.out.println(" ");
 		System.out.println(" ");
-		System.out.println("Bienvenido al apartado de simulacion.");
-		System.out.println("Selecciona lo que deseas hacer:");
+		System.out.println("Welcome to the simulation section.");
+		System.out.println("Select what you want to do:");
 		System.out.println(" ");
-		System.out.println("(1). Simular el prendido de todos los minicuartos.");
-		System.out.println("(2). Simular el apagado de los minicuartos.");
-		System.out.println("(0). Volver al menu principal");
-		int respuesta=sc.nextInt();
+		System.out.println("(1). Simulate the turning on of all the mini-rooms.");
+		System.out.println("(2). Simulate turning off the mini-rooms.");
+		System.out.println("(0). Back to Main Menu");
+		int answer=sc.nextInt();
 
-		return respuesta;
+		return answer;
 	}
 	
-	public void opcionMenuSimulacion(int respuestaMenuSimulacion) {
-		if(respuestaMenuSimulacion!=0&&respuestaMenuSimulacion!=1&&respuestaMenuSimulacion!=2){
+	public void optionMenuSimulation(int answerMenuSimulation) {
+		if(answerMenuSimulation!=0&&answerMenuSimulation!=1&&answerMenuSimulation!=2){
 			System.out.println(" ");
-			System.out.println("///////RECUERDA SELECCIONAR un numero del menu/////////");
+			System.out.println("///////REMEMBER TO SELECT a number from the menu/////////");
 			System.out.println(" ");
 		}
 		try {
@@ -510,58 +502,58 @@ public class SystemDataCenter {
         } catch (Exception e) {
             
         }
-		switch(respuestaMenuSimulacion) {
+		switch(answerMenuSimulation) {
 		case 0: 
 			System.out.println(" ");	
-			System.out.println("Devuleta al menu inicial");
+			System.out.println("Back to the initial menu");
 			System.out.println(" ");
 			break;
 		case 1:
-			simularPrendidoTodos();
+			simulateOnAll();
 			break;
 		case 2:
-			int respuestaMenuSimulacionApagado=0;
+			int responseMenuSimulationOff=0;
 			do{
-				respuestaMenuSimulacionApagado=menuSimulacionApagado();
-				opcionMenuSimulacionApagado(respuestaMenuSimulacionApagado);
-				mapaSimulacion();
-			}while(respuestaMenuSimulacionApagado!=0);
+				responseMenuSimulationOff=menuSimulationOff();
+				optionMenuSimulationOff(responseMenuSimulationOff);
+				simulationMap();
+			}while(responseMenuSimulationOff!=0);
 			
 			break;
 		}
 		
 	}
-	public void simularPrendidoTodos(){
+	public void simulateOnAll(){
 		
-		if(center.simularTodosPrendido()){
+		if(center.simulateAllOn()){
 			
 			System.out.println(" ");
-			System.out.println("Todas las habitaciones han sido prendidas exitosamente");
+			System.out.println("All rooms have been successfully turned on");
 			System.out.println(" ");
 		}
 		
 	}
-	public int menuSimulacionApagado(){
+	public int menuSimulationOff(){
 		System.out.println(" ");
 		System.out.println(" ");
-		System.out.println("Selecciona lo que deseas hacer:");
+		System.out.println("Select what you want to do: ");
 		System.out.println(" ");
-		System.out.println("(1). Apagado en forma de L");
-		System.out.println("(2). Apagado en forma de Z");
-		System.out.println("(3). Apagado en forma de H");
-		System.out.println("(4). Apagado en forma de O");
-		System.out.println("(5). Apagado en forma de M (apaga una columna escogida)");
-		System.out.println("(6). Apagado en forma de P (apaga un corredor escogido)");
-		System.out.println("(0). Volver al menu principal");
-		int respuesta=sc.nextInt();
+		System.out.println("(1). L-shaped shutdown");
+		System.out.println("(2). Z-shaped shutdown");
+		System.out.println("(3). H-shaped shutdown");
+		System.out.println("(4). O-shaped shutdown");
+		System.out.println("(5). M-shaped shutdown (turns off a chosen column)");
+		System.out.println("(6). P-shaped shutdown (shuts down a chosen runner)");
+		System.out.println("(0). Back to Main Menu");
+		int answer=sc.nextInt();
 
-		return respuesta;
+		return answer;
 	}
 	
-	public void opcionMenuSimulacionApagado(int respuestaMenuSimulacion) {
-		if(respuestaMenuSimulacion!=0&&respuestaMenuSimulacion!=1&&respuestaMenuSimulacion!=2&&respuestaMenuSimulacion!=3&&respuestaMenuSimulacion!=4&&respuestaMenuSimulacion!=5&&respuestaMenuSimulacion!=6){
+	public void optionMenuSimulationOff(int answerMenuSimulation) {
+		if(answerMenuSimulation!=0&&answerMenuSimulation!=1&&answerMenuSimulation!=2&&answerMenuSimulation!=3&&answerMenuSimulation!=4&&answerMenuSimulation!=5&&answerMenuSimulation!=6){
 			System.out.println(" ");
-			System.out.println("///////RECUERDA SELECCIONAR un numero del menu/////////");
+			System.out.println("///////REMEMBER TO SELECT a number from the menu/////////");
 			System.out.println(" ");
 		}
 		try {
@@ -569,85 +561,85 @@ public class SystemDataCenter {
         } catch (Exception e) {
             
         }
-		switch(respuestaMenuSimulacion) {
+		switch(answerMenuSimulation) {
 		case 0: 
 			System.out.println(" ");	
-			System.out.println("Devuleta al menu inicial");
+			System.out.println("Back to the initial menu");
 			System.out.println(" ");
 			break;
 		case 1:
-			apagadoL();
+			offL();
 			break;
 		case 2:
-			apagadoZ();
+			offZ();
 			break;
 		case 3:
-			apagadoH();
+			offH();
 			break;
 		case 4:
-			apagadoO();
+			offO();
 			break;
 		case 5:
-			apagadoM();
+			offM();
 			break;
 		case 6:
-			apagadoP();
+			offP();
 			break;
 		}
 		
 	}
-	public void apagadoL(){
-		center.simularApagadoL();
+	public void offL(){
+		center.simulateOffL();
 	}
-	public void apagadoZ(){
-		center.simularApagadoZ();
+	public void offZ(){
+		center.simulateOffZ();
 	}
-	public void apagadoH(){
-		center.simularApagadoH();
+	public void offH(){
+		center.simulateOffH();
 	}
-	public void apagadoO(){
-		center.simularApagadoO();
+	public void offO(){
+		center.simulateOffO();
 	}
-	public void apagadoM(){
+	public void offM(){
 		boolean out=false;
 		do{
-			System.out.println("Digita la columna que quieres apagar (1-50)");
+			System.out.println("Enter the column you want to turn off (1-50)");
 			System.out.println(" ");
-			int columnaApagar=sc.nextInt();
+			int columnTurnOff=sc.nextInt();
 			
-			if(columnaApagar<1 || columnaApagar>50){
-				System.out.println("Error selecciona una columna del 1 al 50.");
+			if(columnTurnOff<1 || columnTurnOff>50){
+				System.out.println("Error selects a column from 1 to 50. ");
 				out=true;
 			}
 			if(!out){
-				center.simularApagadoM(columnaApagar);
+				center.simulateOffM(columnTurnOff);
 				out=true;
 			}
 		}while(!out);
 	}
-	public void apagadoP(){
+	public void offP(){
 		boolean out=false;
 		do{
-			System.out.println("Digita el corredor que quieres apagar (1-8)");
+			System.out.println("DIgita the runner you want to turn off (1-8)");
 			System.out.println(" ");
-			int corredorApagar=sc.nextInt();
+			int corridorTurnOff=sc.nextInt();
 			
-			if(corredorApagar<1 || corredorApagar>8){
-				System.out.println("Error selecciona un corredor del 1 al 8.");
+			if(corridorTurnOff<1 || corridorTurnOff>8){
+				System.out.println("Error selects a corridor from 1 to 8.");
 				out=true;
 			}
 			if(!out){
-				center.simularApagadoP(corredorApagar);
+				center.simulateOffP(corridorTurnOff);
 				out=true;
 			}
 		}while(!out);
 		
 	}
-	public void mapaSimulacion(){
+	public void simulationMap(){
 		System.out.println(" ");
-		System.out.println(center.showMapaSimulacion());
+		System.out.println(center.showMapSimulation());
 		System.out.println(" ");
-		System.out.println("Las habitaciones que aparecen en blanco se encuentran encendidas");
+		System.out.println("Rooms that appear in WHITE are on, others are off");
 		System.out.println(" ");
 		
 	}

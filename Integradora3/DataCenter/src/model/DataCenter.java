@@ -7,10 +7,10 @@ public class DataCenter {
 
 	
 	
-	private double valorAlquilerGeneral;
+	private double generalRentValue;
 	
-	private MiniCuartos rooms[][];
-	private MiniCuartos roomSimuladas[][];
+	private MiniRooms rooms[][];
+	private MiniRooms roomSimulated[][];
 	
 	
 	
@@ -25,36 +25,36 @@ public class DataCenter {
 	public static final String ANSI_RESET = "\u001B[0m";
 	
 	
-	public DataCenter(double valorAlquilerGeneral) {
-		this.valorAlquilerGeneral = valorAlquilerGeneral;
+	public DataCenter(double generalRentValue) {
+		this.generalRentValue = generalRentValue;
 		
-		rooms=new MiniCuartos[50][8];
-		roomSimuladas=new MiniCuartos[50][8];
+		rooms=new MiniRooms[50][8];
+		roomSimulated=new MiniRooms[50][8];
 		
 		
-		boolean ventanaSIoNO=false;
-		String numero="";
-		double valorAlquiler=0;
+		boolean windowYESorNO=false;
+		String number="";
+		double rentalValue=0;
 		for (int i=0; i< 8; i++ ) { // filas numbers.length
 			for (int j = 0; j < 50; j++) { //columnas numbers[0].length
 				if(rooms[j][i]==null){
-					ventanaSIoNO=false;
+					windowYESorNO=false;
 					
 					if(i==0 || i==7){
-						ventanaSIoNO=true;
+						windowYESorNO=true;
 					}else if(j==0 || j==49){
-						ventanaSIoNO=true;
+						windowYESorNO=true;
 					}
-					numero=cambiarStringNumero(j,i);
+					number=changeStringNumber(j,i);
 					
-					valorAlquiler=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
-					rooms[j][i] = new MiniCuartos(valorAlquiler,numero,i,j,ventanaSIoNO);
-					rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.DISPONIBLE);
-					rooms[j][i].setEstado(Estado.APAGADO);
+					rentalValue=calculateDiscounts(i,generalRentValue,windowYESorNO);
+					rooms[j][i] = new MiniRooms(rentalValue,number,i,j,windowYESorNO);
+					rooms[j][i].setRentalStatus(StatusRent.AVAILABLE);
+					rooms[j][i].setStatus(Status.OFF);
 					
-					roomSimuladas[j][i] = new MiniCuartos(valorAlquiler,numero,i,j,ventanaSIoNO);
-					roomSimuladas[j][i].setEstadoDeAlquiler(EstadoAlquiler.DISPONIBLE);
-					roomSimuladas[j][i].setEstado(Estado.APAGADO);
+					roomSimulated[j][i] = new MiniRooms(rentalValue,number,i,j,windowYESorNO);
+					roomSimulated[j][i].setRentalStatus(StatusRent.AVAILABLE);
+					roomSimulated[j][i].setStatus(Status.OFF);
 				}	
 			}
 			
@@ -63,207 +63,191 @@ public class DataCenter {
 	}
 	public String showMapa(){
 		
-		Estado estadoRoomEncendido=Estado.ENCENDIDO;
-		Estado estadoRoomApagado=Estado.APAGADO;
+		Status statusRoomOn=Status.ON;
+		Status statusRoomOff=Status.OFF;
 		
 		
-		String print ="   Corredor 1    Corredor 2    Corredor 3    Corredor 4    Corredor 5    Corredor 6    Corredor 7    Corredor 8 "+"     "+"\n";
+		String print ="   Corridor 1    Corridor 2    Corridor 3    Corridor 4    Corridor 5    Corridor 6    Corridor 7    Corridor 8 "+"     "+"\n";
 		print +="-----------------------------------------------------------------------------------------------------------------"+"\n";
 		for (int i=0; i< 50; i++ ) { 
 			print+="|     ";
 			for (int j = 0; j < 8; j++) { 
-				if((rooms[i][j].getEstado())==estadoRoomEncendido){
-					print += ANSI_YELLOW +rooms[i][j].getNumero()+ ANSI_RESET;
+				if((rooms[i][j].getStatus())==statusRoomOn){
+					print += ANSI_YELLOW +rooms[i][j].getNumber()+ ANSI_RESET;
 				}
-				if((rooms[i][j].getEstado())==estadoRoomApagado){
-					print += ANSI_CYAN +rooms[i][j].getNumero()+ ANSI_RESET;
+				if((rooms[i][j].getStatus())==statusRoomOff){
+					print += ANSI_CYAN +rooms[i][j].getNumber()+ ANSI_RESET;
 				}
 				
 				print +="     |     ";
 			}
-			//System.out.println(ANSI_RED + "Texto de color rojo" + ANSI_RESET);
 			print += "\n";
 		}
 		print +="-----------------------------------------------------------------------------------------------------------------"+"\n";
 		return print;
 	}
-	public String cambiarStringNumero(int j,int i){
+	public String changeStringNumber(int j,int i){
 		j=j+1;
 		i=i+1;
 		//String [] numerosLetras= {"A","B","C","D","E","F","G","H"};
-		String numero=i+"";
+		String number=i+"";
 		if(j<10){
-			numero=numero+"0"+j+"";
+			number=number+"0"+j+"";
 		}else{
-			numero=numero+j+"";
+			number=number+j+"";
 		}
-		return numero;
+		return number;
 
 	}
-	public String showListRooms(double valorAlquiler){
-		//rooms[j][i] = new MiniCuartos(numero);
+	public String showListRooms(double rentalValue){
+		//rooms[j][i] = new MiniRooms(number);
 		String print ="";
-		String numero="";
-		boolean ventanaSIoNO=false;
-		EstadoAlquiler estadoRoom=EstadoAlquiler.DISPONIBLE;
-		String ventana="No";
-		for (int i=0; i< 8; i++ ) { // filas numbers.length
-			for (int j = 0; j < 50; j++) { //columnas numbers[0].length
-				if(rooms[j][i].getEstadoDeAlquiler()==estadoRoom){
-					ventanaSIoNO=false;
+		String number="";
+		boolean windowYESorNO=false;
+		StatusRent statusRoom=StatusRent.AVAILABLE;
+		String window="No";
+		for (int i=0; i< 8; i++ ) { 
+			for (int j = 0; j < 50; j++) { 
+				if(rooms[j][i].getRentalStatus()==statusRoom){
+					windowYESorNO=false;
 					
 					if(i==0 || i==7){
-						ventanaSIoNO=true;
+						windowYESorNO=true;
 					}else if(j==0 || j==49){
-						ventanaSIoNO=true;
+						windowYESorNO=true;
 					}
-					if(ventanaSIoNO==true){
-						ventana="Si";
+					if(windowYESorNO==true){
+						window="Si";
 					}else{
-						ventana="No";
+						window="No";
 					}
 					
-					numero=cambiarStringNumero(j,i);
-					valorAlquiler=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
+					number=changeStringNumber(j,i);
+					rentalValue=calculateDiscounts(i,generalRentValue,windowYESorNO);
 					print=print+rooms[j][i].toString();
-					/*print +="Cuarto numero: "+numero+" - Corredor: "+(i+1)+" - Posicion/Columna: "+(j+1)+" - Ventana: "+ventana+" - Valor de alquiler: "+valorAlquiler+" pesos.";
-					print += "\n";*/
 				}	
 			}
 			
 		}
 		return print;
 	}
-	public double calcularValorHabitacion(String numeroCuarto,int numeroServidores){
-		boolean ventanaSIoNO=false;
+	public double calculateRoomValue(String roomNumber,int numberServers){
+		boolean windowYESorNO=false;
 		
-		String fila=numeroCuarto.substring(0,1);
-		String columna=numeroCuarto.substring(1,3);
+		String row=roomNumber.substring(0,1);
+		String column=roomNumber.substring(1,3);
 		
-		int intFila=Integer.parseInt(fila);
-		int intColumna=Integer.parseInt(columna);
+		int intRow=Integer.parseInt(row);
+		int intColumn=Integer.parseInt(column);
 		
-		int i=intFila-1;
-		int j=intColumna-1;
+		int i=intRow-1;
+		int j=intColumn-1;
 		
 		if(i==0 || i==7){
-			ventanaSIoNO=true;
+			windowYESorNO=true;
 		}else if(j==0 || j==49){
-			ventanaSIoNO=true;
+			windowYESorNO=true;
 		}
-		double valorAlquiler=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
-		if(numeroServidores<4){
-			valorAlquiler=valorAlquiler+(valorAlquiler*0.15);			
+		double rentalValue=calculateDiscounts(i,generalRentValue,windowYESorNO);
+		if(numberServers<4){
+			rentalValue=rentalValue+(rentalValue*0.15);			
 		}
-		return valorAlquiler;
+		return rentalValue;
 		
 		
 	}
-	public double calcularDescuentos(int i,double valorAlquilerGeneral,boolean ventanaSIoNO){
-		double valorAlquiler=valorAlquilerGeneral;
-		
-		/*Minicuarto ubicado en Ventana: tiene un descuento del 10%
-		Minicuarto ubicado en el séptimo corredor: tiene un descuento del 15%
-		Minicuarto ubicado entre el segundo y sexto corredor, tiene un recargo del 25%*/
-		
-		if(ventanaSIoNO==true){
-			valorAlquiler=valorAlquiler-(valorAlquiler*0.1);
+	public double calculateDiscounts(int i,double generalRentValue,boolean windowYESorNO){
+		double rentalValue=generalRentValue;
+		if(windowYESorNO==true){
+			rentalValue=rentalValue-(rentalValue*0.1);
 		}
 		if(i==6){
-			valorAlquiler=valorAlquiler-(valorAlquiler*0.15);
+			rentalValue=rentalValue-(rentalValue*0.15);
 		}
 		if(i>0 && i<5){
-			valorAlquiler=valorAlquiler+(valorAlquiler*0.25);
+			rentalValue=rentalValue+(rentalValue*0.25);
 		}
 
-		return valorAlquiler;
+		return rentalValue;
 	}
-	public boolean miniRoomDisponible(String numeroCuarto){
-		boolean miniRoomEncontrada=false;
+	public boolean miniRoomAvailable(String roomNumber){
+		boolean miniRoomFound=false;
 		
-		String fila=numeroCuarto.substring(0,1);
-		String columna=numeroCuarto.substring(1,3);
+		String row=roomNumber.substring(0,1);
+		String column=roomNumber.substring(1,3);
 		
-		int intFila=Integer.parseInt(fila);
-		int intColumna=Integer.parseInt(columna);
+		int intRow=Integer.parseInt(row);
+		int intColumn=Integer.parseInt(column);
 		
-		EstadoAlquiler estadoRoom=EstadoAlquiler.DISPONIBLE;
+		StatusRent statusRoom=StatusRent.AVAILABLE;
 		
-		
-		//System.out.println("fila:"+intFila+"columna:"+intColumna);
-		if(intFila>0 && intFila<9 && intColumna>0 && intColumna<51){
-			if(rooms[intColumna-1][intFila-1].getEstadoDeAlquiler()==estadoRoom){
-				miniRoomEncontrada=true;
+		if(intRow>0 && intRow<9 && intColumn>0 && intColumn<51){
+			if(rooms[intColumn-1][intRow-1].getRentalStatus()==statusRoom){
+				miniRoomFound=true;
 			}
 		}
 		
-		return miniRoomEncontrada;
+		return miniRoomFound;
 		
 	}
-	public String capacidadRACK(String numeroCuarto){
-		String capacidadTotalRack="";
+	public String capacityRACK(String roomNumber){
+		String capacityTotalRack="";
 		
-		String fila=numeroCuarto.substring(0,1);
-		String columna=numeroCuarto.substring(1,3);
+		String row=roomNumber.substring(0,1);
+		String column=roomNumber.substring(1,3);
 		
-		int intFila=Integer.parseInt(fila);
-		int intColumna=Integer.parseInt(columna);
+		int intRow=Integer.parseInt(row);
+		int intColumn=Integer.parseInt(column);
 		
-		int i=intFila-1;
-		int j=intColumna-1;
+		int i=intRow-1;
+		int j=intColumn-1;
 		
-		capacidadTotalRack=rooms[j][i].calcularCapacidadTotalProcesamiento();
+		capacityTotalRack=rooms[j][i].calculateTotalProcessCapacity();
 		
-		return capacidadTotalRack;
+		return capacityTotalRack;
 		
 	}
-	public String capacidadTodosRACK(String nombreEmpresa){
-		String capacidadTotalTodosRack="";
+	public String capacityAllRACK(String companyName){
+		String capacityTotalAllRack="";
 		double totalRam=0;
-		double totalDisco=0;
+		double totalDisk=0;
 		
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
-			//System.out.println(rooms[j][i].getNombreEmpresa());
-				if(rooms[j][i].getNombreEmpresa()!=null){
-					if(rooms[j][i].getNombreEmpresa().equalsIgnoreCase(nombreEmpresa)){
-						totalDisco=+rooms[j][i].capacidadServidoresDisco();
-						totalRam=+rooms[j][i].capacidadServidoresRAM();
+				if(rooms[j][i].getCompanyName()!=null){
+					if(rooms[j][i].getCompanyName().equalsIgnoreCase(companyName)){
+						totalDisk=+rooms[j][i].capacityServersDisk();
+						totalRam=+rooms[j][i].capacityServersRAM();
 						
 					}
-					
 				}
-					
-				
-				
 			}
-			
 		}
-		capacidadTotalTodosRack="La capadidad total de disco es de "+totalDisco+" teras."+"\n"+"El total de memoria RAM es de "+totalRam+" GB";
+		capacityTotalAllRack="The total disk capacity is "+totalDisk+" teras."+"\n"+"The total RAM memory is "+totalRam+" GB";
 		
-		return capacidadTotalTodosRack;
+		return capacityTotalAllRack;
 		
 	}
-	public void cancelarAlquilerTodas(String nombreEmpresa){
-		boolean ventanaSIoNO=false;
-		String numero="";
-		double valorAlquiler=0;
+	public void cancelRentAll(String companyName){
+		boolean windowYESorNO=false;
+		String number="";
+		double rentalValue=0;
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
-				if(rooms[j][i].getNombreEmpresa()!=null){
-					if(rooms[j][i].getNombreEmpresa().equalsIgnoreCase(nombreEmpresa)){
-						ventanaSIoNO=false;
+				if(rooms[j][i].getCompanyName()!=null){
+					if(rooms[j][i].getCompanyName().equalsIgnoreCase(companyName)){
+						windowYESorNO=false;
 						
 						if(i==0 || i==7){
-							ventanaSIoNO=true;
+							windowYESorNO=true;
 						}else if(j==0 || j==49){
-							ventanaSIoNO=true;
+							windowYESorNO=true;
 						}
-						numero=cambiarStringNumero(j,i);
-						valorAlquiler=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
-						rooms[j][i] = new MiniCuartos(valorAlquiler,numero,i,j,ventanaSIoNO);
-						rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.DISPONIBLE);
-						rooms[j][i].setEstado(Estado.APAGADO);
+						number=changeStringNumber(j,i);
+						rentalValue=calculateDiscounts(i,generalRentValue,windowYESorNO);
+						rooms[j][i] = new MiniRooms(rentalValue,number,i,j,windowYESorNO);
+						rooms[j][i].setRentalStatus(StatusRent.AVAILABLE);
+						rooms[j][i].setStatus(Status.OFF);
 						
 					}
 					
@@ -276,205 +260,199 @@ public class DataCenter {
 		}
 	}
 
-	public void cancelarAlquiler(String numeroCuarto){
-		String fila=numeroCuarto.substring(0,1);
-		String columna=numeroCuarto.substring(1,3);
+	public void cancelRental(String roomNumber){
+		String row=roomNumber.substring(0,1);
+		String column=roomNumber.substring(1,3);
 		
-		int intFila=Integer.parseInt(fila);
-		int intColumna=Integer.parseInt(columna);
+		int intRow=Integer.parseInt(row);
+		int intColumn=Integer.parseInt(column);
 		
-		int i=intFila-1;
-		int j=intColumna-1;
-		rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.DISPONIBLE);
+		int i=intRow-1;
+		int j=intColumn-1;
+		rooms[j][i].setRentalStatus(StatusRent.AVAILABLE);
 		
-		boolean ventanaSIoNO=false;
-		String numero="";
-		double valorAlquiler=0;
+		boolean windowYESorNO=false;
+		String number="";
+		double rentalValue=0;
 		if(i==0 || i==7){
-			ventanaSIoNO=true;
+			windowYESorNO=true;
 		}else if(j==0 || j==49){
-			ventanaSIoNO=true;
+			windowYESorNO=true;
 		}
-		numero=cambiarStringNumero(j,i);
-		valorAlquiler=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
-		rooms[j][i] = new MiniCuartos(valorAlquiler,numero,i,j,ventanaSIoNO);
-		rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.DISPONIBLE);
-		rooms[j][i].setEstado(Estado.APAGADO);
+		number=changeStringNumber(j,i);
+		rentalValue=calculateDiscounts(i,generalRentValue,windowYESorNO);
+		rooms[j][i] = new MiniRooms(rentalValue,number,i,j,windowYESorNO);
+		rooms[j][i].setRentalStatus(StatusRent.AVAILABLE);
+		rooms[j][i].setStatus(Status.OFF);
 	}
-	public boolean miniRoomAlquilada(String numeroCuarto){
-		boolean miniRoomEncontrada=false;
+	public boolean miniRoomRented(String roomNumber){
+		boolean miniRoomFound=false;
 		
-		String fila=numeroCuarto.substring(0,1);
-		String columna=numeroCuarto.substring(1,3);
+		String row=roomNumber.substring(0,1);
+		String column=roomNumber.substring(1,3);
 		
-		int intFila=Integer.parseInt(fila);
-		int intColumna=Integer.parseInt(columna);
+		int intRow=Integer.parseInt(row);
+		int intColumn=Integer.parseInt(column);
 		
-		int i=intFila-1;
-		int j=intColumna-1;
+		int i=intRow-1;
+		int j=intColumn-1;
 		
-		EstadoAlquiler estadoRoom=EstadoAlquiler.ALQUILADO;
+		StatusRent statusRoom=StatusRent.RENTED;
 		
 		
-		if(intFila>0 && intFila<9 && intColumna>0 && intColumna<51){
-			if(rooms[j][i].getEstadoDeAlquiler()==estadoRoom){
-				miniRoomEncontrada=true;
+		if(intRow>0 && intRow<9 && intColumn>0 && intColumn<51){
+			if(rooms[j][i].getRentalStatus()==statusRoom){
+				miniRoomFound=true;
 			}
 		}
 		
-		return miniRoomEncontrada;
+		return miniRoomFound;
 		
 	}
-	public void alquilarRoom(String numeroCuarto,int day,int month,int year,int numeroServidores,String nit,String nombreEmpresa,int numRegistroProyecto,int asignadoMiniRoom){
-		boolean ventanaSIoNO=false;
-		String fila=numeroCuarto.substring(0,1);
-		String columna=numeroCuarto.substring(1,3);
+	public void rentRoom(String roomNumber,int day,int month,int year,int numberServers,String nit,String companyName,int numProjectRegistration,int assignedMiniRoom){
+		boolean windowYESorNO=false;
+		String row=roomNumber.substring(0,1);
+		String column=roomNumber.substring(1,3);
 		
-		int intFila=Integer.parseInt(fila);
-		int intColumna=Integer.parseInt(columna);
-		int i=intFila-1;
-		int j=intColumna-1;
+		int intRow=Integer.parseInt(row);
+		int intColumn=Integer.parseInt(column);
+		int i=intRow-1;
+		int j=intColumn-1;
 		if(i==0 || i==7){
-			ventanaSIoNO=true;
-		}else if((intColumna-1)==0 || (intColumna-1)==49){
-			ventanaSIoNO=true;
+			windowYESorNO=true;
+		}else if((intColumn-1)==0 || (intColumn-1)==49){
+			windowYESorNO=true;
 		}
-		double precio=calcularDescuentos(i,valorAlquilerGeneral,ventanaSIoNO);
-		if(numeroServidores<4){
+		double precio=calculateDiscounts(i,generalRentValue,windowYESorNO);
+		if(numberServers<4){
 			precio=precio+(precio*0.15);
 		}
-		if(asignadoMiniRoom==1){
-			rooms[j][i] = new MiniCuartos(precio,numeroCuarto,day,month,year,numeroServidores,numRegistroProyecto,i,j,ventanaSIoNO);
-			/*rooms[j][i].setEstado(Estado.ENCENDIDO);
-			rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.ALQUILADO);*/
+		if(assignedMiniRoom==1){
+			rooms[j][i] = new MiniRooms(precio,roomNumber,day,month,year,numberServers,numProjectRegistration,i,j,windowYESorNO);
 		}
-		if(asignadoMiniRoom==2){
-			rooms[j][i] = new MiniCuartos(precio,numeroCuarto,day,month,year,numeroServidores,nit,nombreEmpresa,i,j,ventanaSIoNO);
-			
-			/*rooms[j][i].setEstado(Estado.ENCENDIDO);
-			rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.ALQUILADO);*/
+		if(assignedMiniRoom==2){
+			rooms[j][i] = new MiniRooms(precio,roomNumber,day,month,year,numberServers,nit,companyName,i,j,windowYESorNO);
 		}
 		
-		rooms[j][i].setEstado(Estado.ENCENDIDO);
-		rooms[j][i].setEstadoDeAlquiler(EstadoAlquiler.ALQUILADO);
+		rooms[j][i].setStatus(Status.ON);
+		rooms[j][i].setRentalStatus(StatusRent.RENTED);
 		
 		
 		
 		
 	}
-	public void anadirServidor(String numeroCuarto,int x,double cantMemoriaCache,int numProcesadores,int marcaProcesador,double cantMemoriaRAM,int cantDiscos,double capaDiscos){
-		String fila=numeroCuarto.substring(0,1);
-		String columna=numeroCuarto.substring(1,3);
+	public void addServer(String roomNumber,int x,double amountCacheMemory,int getNumProcessors,int brandProcessor,double amountRAMmemory,int discQuantity,double disksCapacity){
+		String row=roomNumber.substring(0,1);
+		String column=roomNumber.substring(1,3);
 		
-		int intFila=Integer.parseInt(fila);
-		int intColumna=Integer.parseInt(columna);
-		int i=intFila-1;
-		int j=intColumna-1;
-		rooms[j][i].addServidor(x,cantMemoriaCache,numProcesadores,marcaProcesador,cantMemoriaRAM,cantDiscos,capaDiscos);
+		int intRow=Integer.parseInt(row);
+		int intColumn=Integer.parseInt(column);
+		int i=intRow-1;
+		int j=intColumn-1;
+		rooms[j][i].addServidor(x,amountCacheMemory,getNumProcessors,brandProcessor,amountRAMmemory,discQuantity,disksCapacity);
 	}
-	public boolean simularTodosPrendido(){
-		boolean prendidoExitoso=false;
-		int contador=0;
+	public boolean simulateAllOn(){
+		boolean turnOnSuccessful=false;
+		int count=0;
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
-				roomSimuladas[j][i].setEstado(Estado.ENCENDIDO);
-				contador++;
+				roomSimulated[j][i].setStatus(Status.ON);
+				count++;
 			}
 		}
-		if (contador==400){
-			prendidoExitoso=true;
+		if (count==400){
+			turnOnSuccessful=true;
 		}
-		return prendidoExitoso;
+		return turnOnSuccessful;
 		
 	}
-	public void simularApagadoL(){
+	public void simulateOffL(){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
 				if(j==0 || i==0){
-					roomSimuladas[j][i].setEstado(Estado.APAGADO);
+					roomSimulated[j][i].setStatus(Status.OFF);
 				}
 			}
 		}
 	}
-	public void simularApagadoZ(){
+	public void simulateOffZ(){
 		int diagonal=48;
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
 				if(i==0 || i==7){
-					roomSimuladas[j][i].setEstado(Estado.APAGADO);
+					roomSimulated[j][i].setStatus(Status.OFF);
 				}
 				if((j+1)==diagonal){
-					roomSimuladas[j][i].setEstado(Estado.APAGADO);
+					roomSimulated[j][i].setStatus(Status.OFF);
 				}
 			}
 			diagonal=diagonal-8;
 		}
 	}
-	public void simularApagadoH(){
+	public void simulateOffH(){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
 				if(i%2!=0){
-					roomSimuladas[j][i].setEstado(Estado.APAGADO);
+					roomSimulated[j][i].setStatus(Status.OFF);
 				}
 			}
 		}
 	}
-	public void simularApagadoO(){
+	public void simulateOffO(){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
 				if(i==0 || i==7 || j==0 || j==49){
-					roomSimuladas[j][i].setEstado(Estado.APAGADO);
+					roomSimulated[j][i].setStatus(Status.OFF);
 				}
 			}
 		}
 		
 	}
-	public void simularApagadoM(int columnaApagar){
+	public void simulateOffM(int columnTurnOff){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
-				if(j==(columnaApagar-1)){
-					roomSimuladas[j][i].setEstado(Estado.APAGADO);
+				if(j==(columnTurnOff-1)){
+					roomSimulated[j][i].setStatus(Status.OFF);
 				}
 			}
 		}
 	}
-	public void simularApagadoP(int corredorApagar){
+	public void simulateOffP(int corridorTurnOff){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
-				if(i==(corredorApagar-1)){
-					roomSimuladas[j][i].setEstado(Estado.APAGADO);
+				if(i==(corridorTurnOff-1)){
+					roomSimulated[j][i].setStatus(Status.OFF);
 				}
 			}
 		}
 	}
-	public double getValorAlquilerGeneral() {
-		return valorAlquilerGeneral;
+	public double getGeneralRentValue() {
+		return generalRentValue;
 	}
 
-	public void setValorAlquilerGeneral(double valorAlquilerGeneral) {
-		this.valorAlquilerGeneral = valorAlquilerGeneral;
+	public void setGeneralRentValue(double generalRentValue) {
+		this.generalRentValue = generalRentValue;
 	}
-	public String showMapaSimulacion(){
+	public String showMapSimulation(){
 		
-		Estado estadoRoomEncendido=Estado.ENCENDIDO;
-		Estado estadoRoomApagado=Estado.APAGADO;
+		Status statusRoomOn=Status.ON;
+		Status statusRoomOff=Status.OFF;
 		
 		
-		String print ="   Corredor 1    Corredor 2    Corredor 3    Corredor 4    Corredor 5    Corredor 6    Corredor 7    Corredor 8 "+"     "+"\n";
+		String print ="   Corridor 1    Corridor 2    Corridor 3    Corridor 4    Corridor 5    Corridor 6    Corridor 7    Corridor 8 "+"     "+"\n";
 		print +="-----------------------------------------------------------------------------------------------------------------"+"\n";
 		for (int i=0; i< 50; i++ ) { 
 			print+="|     ";
 			for (int j = 0; j < 8; j++) { 
-				if((roomSimuladas[i][j].getEstado())==estadoRoomEncendido){
-					print += ANSI_YELLOW +roomSimuladas[i][j].getNumero()+ ANSI_RESET;
+				if((roomSimulated[i][j].getStatus())==statusRoomOn){
+					print += ANSI_YELLOW +roomSimulated[i][j].getNumber()+ ANSI_RESET;
 				}
-				if((roomSimuladas[i][j].getEstado())==estadoRoomApagado){
-					print += ANSI_CYAN +roomSimuladas[i][j].getNumero()+ ANSI_RESET;
+				if((roomSimulated[i][j].getStatus())==statusRoomOff){
+					print += ANSI_CYAN +roomSimulated[i][j].getNumber()+ ANSI_RESET;
 				}
 				
 				print +="     |     ";
 			}
-			//System.out.println(ANSI_RED + "Texto de color rojo" + ANSI_RESET);
 			print += "\n";
 		}
 		print +="-----------------------------------------------------------------------------------------------------------------"+"\n";

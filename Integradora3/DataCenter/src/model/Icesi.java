@@ -1,20 +1,20 @@
 package model;
 
-public class Icesi extends Empresa {
+public class Icesi extends Company {
 	
-	private int numeroRegistro;
+	private int registrationNumber;
 	
-	public Canal(int nit, String nombreEmpresa, int numeroRegistro) {
+	public Canal(int nit, String companyName, int registrationNumber) {
 		this.nit = nit;
-		this.nombreEmpresa = nombreEmpresa;
-		this.numeroRegistro = numeroRegistro;
+		this.companyName = companyName;
+		this.registrationNumber = registrationNumber;
 		
 	}
-	public int getNumeroRegistro() {
-		return numeroRegistro;
+	public int getRegistrationNumber() {
+		return registrationNumber;
 	}
 
-	public void setNumeroRegistro(int numeroRegistro) {
-		this.numeroRegistro = numeroRegistro;
+	public void setRegistrationNumber(int registrationNumber) {
+		this.registrationNumber = registrationNumber;
 	}
 }

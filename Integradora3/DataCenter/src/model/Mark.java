@@ -1,6 +1,6 @@
 package model;
 
-public enum Marca {
+public enum Mark {
 	INTEL, AMD
 
 }

@@ -11,15 +11,28 @@ public class DataCenter {
 	
 	
 	
-	public static final String ANSI_BLACK = "\u001B[30m";
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
+	//public static final String ANSI_BLACK = "\u001B[30m";
+	//public static final String ANSI_RED = "\u001B[31m";
+	//public static final String ANSI_GREEN = "\u001B[32m";
+	//public static final String ANSI_BLUE = "\u001B[34m";
+	//public static final String ANSI_PURPLE = "\u001B[35m";
+	/**
+	* constant to change the color of the words to yellow
+	*/
 	public static final String ANSI_YELLOW = "\u001B[33m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
+	/**
+	* constant to change the color of the words to cyan
+	*/
 	public static final String ANSI_CYAN = "\u001B[36m";
+	/**
+	* constant to change the color of the words to white
+	*/
 	public static final String ANSI_WHITE = "\u001B[37m";
+	/**
+	* constant to change the color of the words to the original
+	*/
 	public static final String ANSI_RESET = "\u001B[0m";
+	
 	
 	/**
     * this method is the constructor of the class
@@ -248,7 +261,7 @@ public class DataCenter {
 	}
 	/**
     * This method calculates the capacity of all Racks
-	* @param roomNumber String
+	* @param companyName String
     * @return capacityTotalAllRack String
     */
 	public String capacityAllRACK(String companyName){
@@ -375,8 +388,8 @@ public class DataCenter {
 	* @param numberServers int
 	* @param nit String
 	* @param companyName String
-    * @return numProjectRegistration int
-	* @return assignedMiniRoom int
+    * @param numProjectRegistration int
+	* @param assignedMiniRoom int
     */
 	public void rentRoom(String roomNumber,int day,int month,int year,int numberServers,String nit,String companyName,int numProjectRegistration,int assignedMiniRoom){
 		boolean windowYESorNO=false;
@@ -419,6 +432,7 @@ public class DataCenter {
 	* @param amountRAMmemory double
 	* @param discQuantity int
 	* @param disksCapacity double
+	* @param brandProcessor int
     */
 	public void addServer(String roomNumber,int x,double amountCacheMemory,int numberProcessors,int brandProcessor,double amountRAMmemory,int discQuantity,double disksCapacity){
 		String row=roomNumber.substring(0,1);
@@ -485,7 +499,7 @@ public class DataCenter {
 	public void simulateOffH(){
 		for (int i=0; i< 8; i++ ) { 
 			for (int j = 0; j < 50; j++) { 
-				if(i%2!=0){
+				if(i%2==0){
 					roomSimulated[j][i].setStatus(Status.OFF);
 				}
 			}
@@ -530,13 +544,24 @@ public class DataCenter {
 			}
 		}
 	}
+	/**
+    * A get method
+    * @return generalRentValue double
+    */
 	public double getGeneralRentValue() {
 		return generalRentValue;
 	}
-
+	/**
+    * A set method
+    * @param generalRentValue double
+    */
 	public void setGeneralRentValue(double generalRentValue) {
 		this.generalRentValue = generalRentValue;
 	}
+	/**
+    * This method shows the rooms that were simulated by means of a string of String
+    * @return print String
+    */
 	public String showMapSimulation(){
 		
 		Status statusRoomOn=Status.ON;

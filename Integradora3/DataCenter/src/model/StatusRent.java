@@ -3,6 +3,13 @@ package model;
 * this is a StatusRent enum
 */
 public enum StatusRent {
-	RENTED, AVAILABLE
+	/**
+	* Status of the RENTED room
+	*/
+	RENTED, 
+	/**
+	* Status of the AVAILABLE room
+	*/
+	AVAILABLE
 
 }

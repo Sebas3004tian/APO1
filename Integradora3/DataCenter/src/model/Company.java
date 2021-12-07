@@ -40,7 +40,7 @@ public class Company {
 	}
 	/**
     * A set method
-    * @param nit String
+    * @param companyName String
     */
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
